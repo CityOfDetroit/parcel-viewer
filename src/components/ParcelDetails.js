@@ -5,16 +5,32 @@ class ParcelDetails extends Component {
 
   constructor(props) {
     super(props)
-    fetch(`https://data.detroitmi.gov/resource/snut-x2sy.json?parcelnum=${this.props.parcel}`)
+    this.state = {
+      parcel: {},
+      fetchedData: false
+    }
+  }
+
+  fetchData(parcelno) {
+    fetch(`https://data.detroitmi.gov/resource/snut-x2sy.json?parcelnum=${parcelno}`)
     .then(response => response.json())
     .then(d => {
       this.setState({ 
-        parcel: d[0] 
+        parcel: d[0],
+        fetchedData: true
       })
     })
     .catch(e => console.log(e))
-    this.state = {
-      parcel: {},
+  }
+
+  componentDidMount() {
+    this.fetchData(this.props.parcel)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+    if(this.props.parcel !== nextProps.parcel) {
+      this.fetchData(nextProps.parcel)
     }
   }
 
