@@ -7541,7 +7541,7 @@
                 "Polygon"
             ],
             "layout": {
-                "visibility": "none"
+                "visibility": "visible"
             },
             "paint": {
                 "line-color": "hsla(0, 0%, 0%, 0.34)",
@@ -7555,6 +7555,55 @@
                         [
                             22,
                             2
+                        ]
+                    ]
+                },
+                "line-opacity": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            15,
+                            0
+                        ],
+                        [
+                            15.4,
+                            0.1
+                        ],
+                        [
+                            15.5,
+                            0.8
+                        ],
+                        [
+                            22,
+                            1
+                        ]
+                    ]
+                }
+            }
+        },
+        {
+            "id": "parcels-highlight",
+            "type": "line",
+            "metadata": {},
+            "source": "composite",
+            "source-layer": "assessor_parcels-50m4yu",
+            "minzoom": 15,
+            "filter": ["==", "parcelno", ""],
+            "layout": {
+                "visibility": "visible"
+            },
+            "paint": {
+                "line-color": "red",
+                "line-width": {
+                    "base": 1,
+                    "stops": [
+                        [
+                            15,
+                            2
+                        ],
+                        [
+                            22,
+                            5
                         ]
                     ]
                 },

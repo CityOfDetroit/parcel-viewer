@@ -44,7 +44,7 @@ export default class App extends Component {
         maxPitch: 0
       },
       zones: [],
-      layers: [],
+      layers: ['parcels'],
       selectedFeature: null,
       mapStyle: defaultMapStyle
     }
@@ -92,10 +92,13 @@ export default class App extends Component {
   };
 
   _onClick = (event) => {
-    console.log(event.features)
+    let style = this.state.mapStyle
     if(event.features.length > 0) {
+      let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'parcels-highlight')
+      style = style.setIn(['layers', layerIndex, 'filter', 2], event.features[0].properties.parcelno)
       this.setState({
-        selectedFeature: event.features[0]
+        selectedFeature: event.features[0],
+        mapStyle: style
       })
     }
   } 
@@ -130,7 +133,7 @@ export default class App extends Component {
             )}
           </CheckboxGroup>
         </div>
-        <div className="layers bg-white">
+        {/* <div className="layers bg-white">
           <CheckboxGroup name="layers" value={this.state.layers} onChange={this._onLayerChange} >
             {Object.keys(Layers).map(l => 
               <div key={l}>
@@ -141,10 +144,10 @@ export default class App extends Component {
               </div>
             )}
           </CheckboxGroup>
-        </div>
+        </div> */}
         <div className="details bg-white">
             {this.state.selectedFeature ? 
-              <ParcelDetails parcel={this.state.selectedFeature.properties.parcelno || this.state.selectedFeature.properties.apn} /> : `Click for a meaningless number`}
+              <ParcelDetails parcel={this.state.selectedFeature.properties.parcelno || this.state.selectedFeature.properties.apn} /> : `Click a parcel.`}
         </div>
       </div>
     );

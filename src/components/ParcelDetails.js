@@ -28,7 +28,6 @@ class ParcelDetails extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
     if(this.props.parcel !== nextProps.parcel) {
       this.fetchData(nextProps.parcel)
     }
@@ -37,6 +36,7 @@ class ParcelDetails extends Component {
   render() {
     return (
       <div className="pa2">
+        <h3>Parcel details</h3>
         <span className="db f7 fw7 bb">Parcel ID</span>
         <span className="db pb1 f4">{this.props.parcel}</span>
         <ParcelDetailTable parcel={this.state.parcel} />
