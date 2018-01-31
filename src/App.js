@@ -1,8 +1,8 @@
 /* global window */
 import React, {Component} from 'react';
-import {render} from 'react-dom';
+// import {render/} from 'react-dom';
 
-import MapGL, {Marker} from 'react-map-gl';
+import MapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
@@ -11,10 +11,9 @@ import _ from 'lodash';
 import Zones from './data/zones.js'
 import Layers from './data/layers.js'
 import {defaultMapStyle, highlightLayerIndex} from './map-style.js';
-import MAP_STYLE from './data/style.json';
 
 import ZoningClass from './components/ZoningClass'
-import { fromJS, toJS } from 'immutable';
+import ParcelDetails from './components/ParcelDetails'
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiY2l0eW9mZGV0cm9pdCIsImEiOiJjaXZvOWhnM3QwMTQzMnRtdWhyYnk5dTFyIn0.FZMFi0-hvA60KYnI-KivWg'; // Set your mapbox token here
 
@@ -49,8 +48,6 @@ export default class App extends Component {
       selectedFeature: null,
       mapStyle: defaultMapStyle
     }
-
-    this._zonesDidChange = this._zonesDidChange.bind(this)
   }
 
 
@@ -63,7 +60,7 @@ export default class App extends Component {
     window.removeEventListener('resize', this._resize);
   }
 
-  _zonesDidChange = newZones => {
+  _onZoneChange = newZones => {
     const style = this.state.mapStyle
     this.setState({
       zones: newZones,
@@ -71,7 +68,7 @@ export default class App extends Component {
     });
   }
 
-  _layersDidChange = newLayers => {
+  _onLayerChange = newLayers => {
     let style = this.state.mapStyle
     _.forEach(Object.keys(Layers), l => {
       let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === l)
@@ -88,8 +85,8 @@ export default class App extends Component {
     this.setState({
       viewport: {
         ...this.state.viewport,
-        width: this.props.width || window.innerWidth,
-        height: this.props.height || window.innerHeight
+        width: this.props.width || (window.innerWidth * 4 / 6),
+        height: this.props.height || window.innerHeight - 75
       }
     });
   };
@@ -122,7 +119,7 @@ export default class App extends Component {
           </MapGL>
         </div>
         <div className="zones bg-white">
-          <CheckboxGroup name="zones" value={this.state.zones} onChange={this._zonesDidChange} >
+          <CheckboxGroup name="zones" value={this.state.zones} onChange={this._onZoneChange} >
             {Object.keys(Zones).map(z => 
               <div key={z}>
                 <Checkbox className="dn" value={z} id={z}/>
@@ -134,7 +131,7 @@ export default class App extends Component {
           </CheckboxGroup>
         </div>
         <div className="layers bg-white">
-          <CheckboxGroup name="layers" value={this.state.layers} onChange={this._layersDidChange} >
+          <CheckboxGroup name="layers" value={this.state.layers} onChange={this._onLayerChange} >
             {Object.keys(Layers).map(l => 
               <div key={l}>
                 <Checkbox className="" value={l} id={l}/>
@@ -146,7 +143,8 @@ export default class App extends Component {
           </CheckboxGroup>
         </div>
         <div className="details bg-white">
-            {this.state.selectedFeature ? this.state.selectedFeature.id : `Click for a meaningless number`}
+            {this.state.selectedFeature ? 
+              <ParcelDetails parcel={this.state.selectedFeature.properties.parcelno || this.state.selectedFeature.properties.apn} /> : `Click for a meaningless number`}
         </div>
       </div>
     );

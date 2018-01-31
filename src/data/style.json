@@ -81,7 +81,7 @@
     "pitch": 0,
     "sources": {
         "composite": {
-            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,cityofdetroit.5kwrqmxx,cityofdetroit.d9h31wp8,cityofdetroit.parcels_base",
+            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,cityofdetroit.5kwrqmxx,cityofdetroit.d9h31wp8,cityofdetroit.4pyiqqv4",
             "type": "vector"
         }
     },
@@ -7533,7 +7533,7 @@
             "type": "line",
             "metadata": {},
             "source": "composite",
-            "source-layer": "parcels",
+            "source-layer": "assessor_parcels-50m4yu",
             "minzoom": 15,
             "filter": [
                 "==",
@@ -7586,27 +7586,7 @@
             "type": "fill",
             "metadata": {},
             "source": "composite",
-            "source-layer": "parcels",
-            "interactive": true,
-            "minzoom": 15,
-            "filter": [
-                "==",
-                "$type",
-                "Polygon"
-            ],
-            "layout": {
-                "visibility": "visible"
-            },
-            "paint": {
-                "fill-color": "rgba(0,0,0,0)"
-            }
-        },
-        {
-            "id": "buildings-fill",
-            "type": "fill",
-            "metadata": {},
-            "source": "composite",
-            "source-layer": "buildings",
+            "source-layer": "assessor_parcels-50m4yu",
             "interactive": true,
             "minzoom": 15,
             "filter": [
