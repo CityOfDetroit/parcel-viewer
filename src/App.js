@@ -42,6 +42,8 @@ export default class App extends Component {
       selectedParcelDetails: null,
       mapStyle: defaultMapStyle
     }
+
+    this.onSearchSelect = this.onSearchSelect.bind(this)
   }
 
   fetchData(parcelno) {
@@ -58,6 +60,24 @@ export default class App extends Component {
       this.highlightParcel(this.state.selectedParcel)
     })
     .catch(e => console.log(e))
+  }
+
+  onSearchSelect(value) {
+    fetch(`https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates?Single+Line+Input=${value}&outSR=4326&outFields=*&f=pjson`)
+    .then(r => r.json())
+    .then(d => {
+      console.log(d)
+      this.setState({
+        selectedParcel: d.candidates[0].attributes['User_fld'],
+        viewport: {
+          ...this.state.viewport,
+          latitude: d.candidates[0].location.y,
+          longitude: d.candidates[0].location.x,
+        }
+      })
+      this.highlightParcel(d.candidates[0].attributes['User_fld'])
+      this.props.history.push(`/${d.candidates[0].attributes['User_fld']}`)
+    })
   }
 
   highlightParcel(parcelno) {
@@ -125,7 +145,7 @@ export default class App extends Component {
             mapboxApiAccessToken={MAPBOX_TOKEN} >
           </MapGL>
         </div>
-        <AddressSearch />
+        <AddressSearch onSelect={this.onSearchSelect} />
         <div className="details bg-white">
             {this.state.selectedParcel ? 
               <ParcelDetails parcel={this.state.selectedParcel} /> : `Click a parcel.`}

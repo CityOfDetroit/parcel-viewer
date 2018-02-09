@@ -35,7 +35,7 @@ class AddressSearch extends React.Component {
       <AutoComplete
         dataSource={dataSource}
         style={{ width: 200 }}
-        onSelect={onSelect}
+        onSelect={this.props.onSelect}
         onSearch={this.handleSearch}
         placeholder="input here"
       />
