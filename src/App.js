@@ -134,7 +134,10 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <Header />
+        <div className="header pb2">
+          <Header />
+          <AddressSearch onSelect={this.onSearchSelect} />
+        </div>
         <div className="map">
           <MapGL
             {...viewport}
@@ -145,7 +148,6 @@ export default class App extends Component {
             mapboxApiAccessToken={MAPBOX_TOKEN} >
           </MapGL>
         </div>
-        <AddressSearch onSelect={this.onSearchSelect} />
         <div className="details bg-white">
             {this.state.selectedParcel ? 
               <ParcelDetails parcel={this.state.selectedParcel} /> : `Click a parcel.`}
