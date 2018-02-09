@@ -15,7 +15,7 @@ class AddressSearch extends React.Component {
 
   suggestAddress(value) {
     if(value !== '') {
-      fetch(`http://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/suggest?text=${value}&f=pjson`)
+      fetch(`https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/suggest?text=${value}&f=pjson`)
       .then(r => r.json())
       .then(d => {
         this.setState({
