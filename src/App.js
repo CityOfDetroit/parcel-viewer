@@ -5,10 +5,9 @@ import MapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {defaultMapStyle} from './map-style.js';
 
-import { Link } from 'react-router-dom';
-
-import ParcelDetails from './components/ParcelDetails'
-import Header from './components/Header'
+import ParcelDetails from './components/ParcelDetails';
+import AddressSearch from './components/AddressSearch';
+import Header from './components/Header';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiY2l0eW9mZGV0cm9pdCIsImEiOiJjaXZvOWhnM3QwMTQzMnRtdWhyYnk5dTFyIn0.FZMFi0-hvA60KYnI-KivWg'; // Set your mapbox token here
 
@@ -75,7 +74,6 @@ export default class App extends Component {
     this._resize();
     if(this.props.match.params.name) {
       this.fetchData(this.state.selectedParcel)
-      // this.highlightParcel(this.state.selectedParcel)
     }
   }
 
@@ -99,12 +97,11 @@ export default class App extends Component {
 
   _onClick = (event) => {
     if(event.features.length > 0) {
-      console.log(event.features)
+      console.log(event.features[0])
       this.highlightParcel(event.features[0].properties.parcelno)
-      // this.fetchData(event.features[0].parcelnum)
       this.props.history.push(`/${event.features[0].properties.parcelno}`)
       this.setState({
-        selectedParcel: event.features[0].properties.parcelno,
+        selectedParcel: event.features[0].properties.parcelno
       })
     }
   } 
@@ -128,6 +125,7 @@ export default class App extends Component {
             mapboxApiAccessToken={MAPBOX_TOKEN} >
           </MapGL>
         </div>
+        <AddressSearch />
         <div className="details bg-white">
             {this.state.selectedParcel ? 
               <ParcelDetails parcel={this.state.selectedParcel} /> : `Click a parcel.`}
