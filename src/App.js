@@ -1,19 +1,13 @@
 /* global window */
 import React, {Component} from 'react';
-// import {render/} from 'react-dom';
 
 import MapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import {defaultMapStyle} from './map-style.js';
 
-import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
-import _ from 'lodash';
-
-import Zones from './data/zones.js'
-import Layers from './data/layers.js'
-import {defaultMapStyle, highlightLayerIndex} from './map-style.js';
-
-import ZoningClass from './components/ZoningClass'
-import ParcelDetails from './components/ParcelDetails'
+import ParcelDetails from './components/ParcelDetails';
+import AddressSearch from './components/AddressSearch';
+import Header from './components/Header';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiY2l0eW9mZGV0cm9pdCIsImEiOiJjaXZvOWhnM3QwMTQzMnRtdWhyYnk5dTFyIn0.FZMFi0-hvA60KYnI-KivWg'; // Set your mapbox token here
 
@@ -21,11 +15,12 @@ export default class App extends Component {
 
   constructor(props) {
     super(props)
+    console.log(props)
     this.state = {
       viewport: {
         latitude: 42.331,
         longitude: -83.0457,
-        zoom: 11,
+        zoom: 16,
         bearing: 0,
         pitch: 0,
         width: 500,
@@ -43,42 +38,71 @@ export default class App extends Component {
         minPitch: 0,
         maxPitch: 0
       },
-      zones: [],
-      layers: ['parcels'],
-      selectedFeature: null,
+      selectedParcel: this.props.match.params.name || null,
+      selectedParcelDetails: null,
       mapStyle: defaultMapStyle
     }
+
+    this.onSearchSelect = this.onSearchSelect.bind(this)
   }
 
+  fetchData(parcelno) {
+    fetch(`https://data.detroitmi.gov/resource/snut-x2sy.json?parcelnum=${this.state.selectedParcel}`)
+    .then(response => response.json())
+    .then(d => {
+      this.setState({
+        selectedParcelDetails: d[0],
+        viewport: { ...this.state.viewport,
+          latitude: parseFloat(d[0].latitude, 10),
+          longitude: parseFloat(d[0].longitude, 10),
+        }
+      })
+      this.highlightParcel(this.state.selectedParcel)
+    })
+    .catch(e => console.log(e))
+  }
+
+  onSearchSelect(value) {
+    fetch(`https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates?Single+Line+Input=${value}&outSR=4326&outFields=*&f=pjson`)
+    .then(r => r.json())
+    .then(d => {
+      console.log(d)
+      this.setState({
+        selectedParcel: d.candidates[0].attributes['User_fld'],
+        viewport: {
+          ...this.state.viewport,
+          latitude: d.candidates[0].location.y,
+          longitude: d.candidates[0].location.x,
+        }
+      })
+      this.highlightParcel(d.candidates[0].attributes['User_fld'])
+      this.props.history.push(`/${d.candidates[0].attributes['User_fld']}`)
+    })
+  }
+
+  highlightParcel(parcelno) {
+    let style = this.state.mapStyle
+    let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'parcels-highlight')
+    style = style.setIn(['layers', layerIndex, 'filter', 2], parcelno)
+    this.setState({
+      mapStyle: style
+    })
+  }
 
   componentDidMount() {
     window.addEventListener('resize', this._resize);
     this._resize();
+    if(this.props.match.params.name) {
+      this.fetchData(this.state.selectedParcel)
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
   }
 
   componentWillUnmount() {
     window.removeEventListener('resize', this._resize);
-  }
-
-  _onZoneChange = newZones => {
-    const style = this.state.mapStyle
-    this.setState({
-      zones: newZones,
-      mapStyle: style.setIn(['layers', highlightLayerIndex, 'filter'], ["in", "zoning_rev"].concat(newZones))
-    });
-  }
-
-  _onLayerChange = newLayers => {
-    let style = this.state.mapStyle
-    _.forEach(Object.keys(Layers), l => {
-      let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === l)
-      let shown = newLayers.indexOf(l) > -1
-      style = style.setIn(['layers', layerIndex, 'layout', 'visibility'], shown ? 'visible' : 'none')
-    })
-    this.setState({
-      layers: newLayers,
-      mapStyle: style
-    });
   }
 
   _resize = () => {
@@ -92,13 +116,12 @@ export default class App extends Component {
   };
 
   _onClick = (event) => {
-    let style = this.state.mapStyle
     if(event.features.length > 0) {
-      let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'parcels-highlight')
-      style = style.setIn(['layers', layerIndex, 'filter', 2], event.features[0].properties.parcelno)
+      console.log(event.features[0])
+      this.highlightParcel(event.features[0].properties.parcelno)
+      this.props.history.push(`/${event.features[0].properties.parcelno}`)
       this.setState({
-        selectedFeature: event.features[0],
-        mapStyle: style
+        selectedParcel: event.features[0].properties.parcelno
       })
     }
   } 
@@ -111,6 +134,10 @@ export default class App extends Component {
 
     return (
       <div className="App">
+        <div className="header pb2">
+          <Header />
+          <AddressSearch onSelect={this.onSearchSelect} />
+        </div>
         <div className="map">
           <MapGL
             {...viewport}
@@ -121,33 +148,9 @@ export default class App extends Component {
             mapboxApiAccessToken={MAPBOX_TOKEN} >
           </MapGL>
         </div>
-        <div className="zones bg-white">
-          <CheckboxGroup name="zones" value={this.state.zones} onChange={this._onZoneChange} >
-            {Object.keys(Zones).map(z => 
-              <div key={z}>
-                <Checkbox className="dn" value={z} id={z}/>
-                <label for={z}>
-                  <ZoningClass zone={z} selected={this.state.zones.indexOf(z) > -1}/>
-                </label>
-              </div>
-            )}
-          </CheckboxGroup>
-        </div>
-        {/* <div className="layers bg-white">
-          <CheckboxGroup name="layers" value={this.state.layers} onChange={this._onLayerChange} >
-            {Object.keys(Layers).map(l => 
-              <div key={l}>
-                <Checkbox className="" value={l} id={l}/>
-                <label for={l}>
-                  {l}
-                </label>
-              </div>
-            )}
-          </CheckboxGroup>
-        </div> */}
         <div className="details bg-white">
-            {this.state.selectedFeature ? 
-              <ParcelDetails parcel={this.state.selectedFeature.properties.parcelno || this.state.selectedFeature.properties.apn} /> : `Click a parcel.`}
+            {this.state.selectedParcel ? 
+              <ParcelDetails parcel={this.state.selectedParcel} /> : `Click a parcel.`}
         </div>
       </div>
     );

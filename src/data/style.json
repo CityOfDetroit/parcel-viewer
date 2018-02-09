@@ -7534,7 +7534,7 @@
             "metadata": {},
             "source": "composite",
             "source-layer": "assessor_parcels-50m4yu",
-            "minzoom": 15,
+            "minzoom": 11,
             "filter": [
                 "==",
                 "$type",
@@ -7549,8 +7549,8 @@
                     "base": 1,
                     "stops": [
                         [
-                            15,
-                            1
+                            14,
+                            0.5
                         ],
                         [
                             22,
@@ -7562,15 +7562,15 @@
                     "base": 1,
                     "stops": [
                         [
-                            15,
+                            14,
                             0
                         ],
                         [
-                            15.4,
+                            14.4,
                             0.1
                         ],
                         [
-                            15.5,
+                            14.5,
                             0.8
                         ],
                         [

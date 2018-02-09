@@ -16,8 +16,7 @@ class ParcelDetails extends Component {
     .then(response => response.json())
     .then(d => {
       this.setState({ 
-        parcel: d[0],
-        fetchedData: true
+        parcel: d[0]
       })
     })
     .catch(e => console.log(e))
@@ -36,9 +35,7 @@ class ParcelDetails extends Component {
   render() {
     return (
       <div className="pa2">
-        <h3>Parcel details</h3>
-        <span className="db f7 fw7 bb">Parcel ID</span>
-        <span className="db pb1 f4">{this.props.parcel}</span>
+        <span className="db f7 fw7 bb">Parcel number: {this.props.parcel}</span>
         <ParcelDetailTable parcel={this.state.parcel} />
       </div>
     )
