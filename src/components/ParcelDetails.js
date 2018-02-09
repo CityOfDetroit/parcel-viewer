@@ -16,8 +16,7 @@ class ParcelDetails extends Component {
     .then(response => response.json())
     .then(d => {
       this.setState({ 
-        parcel: d[0],
-        fetchedData: true
+        parcel: d[0]
       })
     })
     .catch(e => console.log(e))
