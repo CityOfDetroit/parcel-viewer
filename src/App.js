@@ -65,6 +65,8 @@ export default class App extends Component {
         selectedParcelDetails: d[0],
       })
       this.highlightParcel(this.state.selectedParcel)
+      // console.log(d[0].location.coordinates)
+      this._goToParcel(d[0].location.coordinates)
     })
     .catch(e => console.log(e))
   }
