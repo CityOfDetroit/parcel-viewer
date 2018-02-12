@@ -49,7 +49,8 @@ export default class App extends Component {
       selectedParcel: this.props.match.params.name || null,
       selectedParcelDetails: null,
       mapStyle: defaultMapStyle,
-      showZoningLegend: true
+      showZoningLegend: true,
+      didAutolocate: false,
     }
 
     this.onSearchSelect = this.onSearchSelect.bind(this)
@@ -61,12 +62,24 @@ export default class App extends Component {
     fetch(`https://data.detroitmi.gov/resource/snut-x2sy.json?parcelnum=${this.state.selectedParcel}`)
     .then(response => response.json())
     .then(d => {
-      this.setState({
-        selectedParcelDetails: d[0],
-      })
+      if(this.props.match.params.name && !this.didAutolocate) {
+        this.setState({
+          selectedParcelDetails: d[0],
+          didAutolocate: true,
+          viewport: {
+            ...this.state.viewport,
+            latitude: d[0].location.coordinates[1],
+            longitude: d[0].location.coordinates[0],
+          }
+        })
+      }
+      else {
+        this.setState({
+          selectedParcelDetails: d[0]
+        })
+      }
+
       this.highlightParcel(this.state.selectedParcel)
-      // console.log(d[0].location.coordinates)
-      this._goToParcel(d[0].location.coordinates)
     })
     .catch(e => console.log(e))
   }
@@ -102,11 +115,6 @@ export default class App extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
-    this.fetchData(nextProps.match.params.name)
-  }
-
   componentWillUnmount() {
     window.removeEventListener('resize', this._resize);
   }
@@ -137,10 +145,10 @@ export default class App extends Component {
       const center = centroid(event.features[0]).geometry.coordinates
       this.highlightParcel(event.features[0].properties.parcelno)
       this.props.history.push(`/${event.features[0].properties.parcelno}`)
-      this._goToParcel(center)
       this.setState({
         selectedParcel: event.features[0].properties.parcelno,
       })
+      this._goToParcel(center)
     }
   } 
 
