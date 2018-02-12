@@ -102,7 +102,7 @@
             }
         },
         {
-            "id": "mapbox-mapbox-satellite",
+            "id": "satellite",
             "type": "raster",
             "source": "mapbox://mapbox.satellite",
             "layout": {},
@@ -823,7 +823,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -898,7 +899,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -980,7 +982,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1048,7 +1051,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1133,7 +1137,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1218,7 +1223,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1289,7 +1295,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1357,7 +1364,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1429,7 +1437,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1500,7 +1509,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1568,7 +1578,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1636,7 +1647,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "miter"
+                "line-join": "miter",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1747,7 +1759,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1842,7 +1855,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1939,7 +1953,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -1999,7 +2014,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -2058,7 +2074,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -2143,7 +2160,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -2198,7 +2216,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -2266,7 +2285,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -2334,7 +2354,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -2394,7 +2415,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -2450,7 +2472,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -2500,7 +2523,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -5761,7 +5785,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -5856,7 +5881,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -5961,7 +5987,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6024,7 +6051,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6078,7 +6106,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6163,7 +6192,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6214,7 +6244,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6282,7 +6313,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6350,7 +6382,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6417,7 +6450,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6488,7 +6522,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6546,7 +6581,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6597,7 +6633,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-color": "#e8edeb",
@@ -6652,7 +6689,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6737,7 +6775,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6809,7 +6848,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6876,7 +6916,8 @@
                 ]
             ],
             "layout": {
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -6949,7 +6990,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -7009,7 +7051,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -7068,7 +7111,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {
@@ -7123,7 +7167,8 @@
             ],
             "layout": {
                 "line-cap": "round",
-                "line-join": "round"
+                "line-join": "round",
+                "visibility": "none"
             },
             "paint": {
                 "line-width": {

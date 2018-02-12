@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = () => (
   <div className="tl pa2">
-    <span className="f4 fw7">Detroit Property Viewer</span>
+    <span className="db f4 fw7 bb">Detroit Parcel Viewer</span>
   </div>
 )
 

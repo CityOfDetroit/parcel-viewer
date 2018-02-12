@@ -1,10 +1,11 @@
 /* global window */
 import React, {Component} from 'react';
 
-import MapGL from 'react-map-gl';
+import MapGL, { FlyToInterpolator } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {defaultMapStyle} from './map-style.js';
 import _ from 'lodash';
+import * as d3 from 'd3';
 
 import centroid from '@turf/centroid';
 
@@ -12,6 +13,8 @@ import ParcelDetails from './components/ParcelDetails';
 import AddressSearch from './components/AddressSearch';
 import Header from './components/Header';
 import LayerSwitch from './components/LayerSwitch';
+import ZoningClass from './components/ZoningClass.js'
+import Zones from './data/zones.js'
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiY2l0eW9mZGV0cm9pdCIsImEiOiJjaXZvOWhnM3QwMTQzMnRtdWhyYnk5dTFyIn0.FZMFi0-hvA60KYnI-KivWg'; // Set your mapbox token here
 
@@ -44,7 +47,8 @@ export default class App extends Component {
       },
       selectedParcel: this.props.match.params.name || null,
       selectedParcelDetails: null,
-      mapStyle: defaultMapStyle
+      mapStyle: defaultMapStyle,
+      showZoningLegend: true
     }
 
     this.onSearchSelect = this.onSearchSelect.bind(this)
@@ -71,12 +75,8 @@ export default class App extends Component {
       console.log(d)
       this.setState({
         selectedParcel: d.candidates[0].attributes['User_fld'],
-        viewport: {
-          ...this.state.viewport,
-          latitude: d.candidates[0].location.y,
-          longitude: d.candidates[0].location.x,
-        }
       })
+      this._goToParcel([d.candidates[0].location.x, d.candidates[0].location.y])
       this.highlightParcel(d.candidates[0].attributes['User_fld'])
       this.props.history.push(`/${d.candidates[0].attributes['User_fld']}`)
     })
@@ -109,13 +109,24 @@ export default class App extends Component {
   }
 
   _resize = () => {
-    this.setState({
-      viewport: {
-        ...this.state.viewport,
-        width: ( window.outerWidth * 7) / 10,
-        height: window.innerHeight
-      }
-    });
+    if (window.innerWidth > 650) {
+      this.setState({
+        viewport: {
+          ...this.state.viewport,
+          width: ( window.outerWidth * 7) / 10,
+          height: window.innerHeight
+        }
+      });
+    }
+    else {
+      this.setState({
+        viewport: {
+          ...this.state.viewport,
+          width: window.innerWidth,
+          height: window.innerHeight / 3 
+        }
+      });
+    }
   };
 
   _onClick = (event) => {
@@ -123,13 +134,9 @@ export default class App extends Component {
       const center = centroid(event.features[0]).geometry.coordinates
       this.highlightParcel(event.features[0].properties.parcelno)
       this.props.history.push(`/${event.features[0].properties.parcelno}`)
+      this._goToParcel(center)
       this.setState({
         selectedParcel: event.features[0].properties.parcelno,
-        viewport: {
-          ...this.state.viewport,
-          latitude: center[1],
-          longitude: center[0]
-        }
       })
     }
   } 
@@ -141,14 +148,14 @@ export default class App extends Component {
     let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'zoning')
     style = style.setIn(['layers', layerIndex, 'layout', 'visibility'], checked ? 'visible' : 'none')     
     this.setState({
-      mapStyle: style
+      mapStyle: style,
+      showZoningLegend: checked ? true : false
     })
   }
 
   _onRoadsChange = (checked) => {
     let style = this.state.mapStyle
     _.forEach(style.toJS().layers, (l, i) => {
-      (console.log(l, i))
       if(l['source-layer'] === 'road') {
         style = style.setIn(['layers', i, 'layout', 'visibility'], checked ? 'visible' : 'none')
       }
@@ -160,11 +167,23 @@ export default class App extends Component {
 
   _onSatelliteChange = (checked) => {
     let style = this.state.mapStyle
-    let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'mapbox-mapbox-satellite')
+    let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'satellite')
     style = style.setIn(['layers', layerIndex, 'layout', 'visibility'], checked ? 'visible' : 'none')     
     this.setState({
       mapStyle: style
     })
+  }
+
+  _goToParcel = (coords) => {
+    const viewport = {
+      ...this.state.viewport,
+      longitude: coords[0],
+      latitude: coords[1],
+      transitionDuration: 250,
+      transitionInterpolator: new FlyToInterpolator(),
+      transitionEasing: d3.easeCubic
+  };
+    this.setState({viewport})
   }
 
   render() {
@@ -176,9 +195,14 @@ export default class App extends Component {
         <div className="header">
           <Header />
           <AddressSearch onSelect={this.onSearchSelect} />
-          <LayerSwitch name='zoning' onChange={this._onZoningChange}/>
-          <LayerSwitch name='satellite' onChange={this._onSatelliteChange}/>
-          <LayerSwitch name='roads' onChange={this._onRoadsChange}/>
+          <div className="pa2">
+            <span className="db f5 fw7 bb">Map layers</span>
+            <div className="pv2" style={{display: 'flex', flexDirection: 'row'}}>
+              <LayerSwitch name='zoning' defaultChecked onChange={this._onZoningChange} />
+              <LayerSwitch name='satellite' defaultChecked onChange={this._onSatelliteChange} />
+              <LayerSwitch name='roads' defaultChecked={false} onChange={this._onRoadsChange} />
+            </div>
+          </div>
         </div>
         <div className="map">
           <MapGL
@@ -193,6 +217,13 @@ export default class App extends Component {
         <div className="details bg-white">
             {this.state.selectedParcel ? 
               <ParcelDetails parcel={this.state.selectedParcel} /> : `Click a parcel.`}
+            {this.state.showZoningLegend ? (
+              <div className="pa2">
+              <span className="db f5 fw7 bb">Zoning classifications</span>
+              <div className="h5 overflow-scroll">
+              {Object.keys(Zones).map(z => 
+                <ZoningClass zone={z}/>           
+              )}</div></div>) : null}
         </div>
       </div>
     );

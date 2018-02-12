@@ -28,13 +28,15 @@ class AddressSearch extends React.Component {
   render() {
     const { dataSource } = this.state;
     return (
-      <AutoComplete
-        dataSource={dataSource}
-        style={{ width: '100%', display: 'flex', alignItems: 'center', marginBottom: '1em' }}
-        onSelect={this.props.onSelect}
-        onSearch={this.handleSearch}
-        placeholder="Search for an address..."
-      />
+      <div className="pa2">
+        <AutoComplete
+          dataSource={dataSource}
+          style={{ width: '300px' }}
+          onSelect={this.props.onSelect}
+          onSearch={this.handleSearch}
+          placeholder="Search for an address..."
+        />
+      </div>
     );
   }
 }
