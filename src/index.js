@@ -7,7 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 ReactDOM.render(
-  <Router basename="/zoned-react">
+  <Router basename="/parcel-viewer">
     <Switch>
       <Route exact path='/' component={App} />
       <Route path='/:name' component={App} />
