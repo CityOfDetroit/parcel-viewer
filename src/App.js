@@ -12,6 +12,7 @@ import centroid from '@turf/centroid';
 import ParcelDetails from './components/ParcelDetails';
 import AddressSearch from './components/AddressSearch';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import LayerSwitch from './components/LayerSwitch';
 import ZoningClass from './components/ZoningClass.js'
 import Zones from './data/zones.js'
@@ -123,7 +124,7 @@ export default class App extends Component {
         viewport: {
           ...this.state.viewport,
           width: window.innerWidth,
-          height: window.innerHeight / 3 
+          height: window.innerHeight * 3 / 10 
         }
       });
     }
@@ -192,18 +193,6 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <div className="header">
-          <Header />
-          <AddressSearch onSelect={this.onSearchSelect} />
-          <div className="pa2">
-            <span className="db f5 fw7 bb">Map layers</span>
-            <div className="pv2" style={{display: 'flex', flexDirection: 'row'}}>
-              <LayerSwitch name='zoning' defaultChecked onChange={this._onZoningChange} />
-              <LayerSwitch name='satellite' defaultChecked onChange={this._onSatelliteChange} />
-              <LayerSwitch name='roads' defaultChecked={false} onChange={this._onRoadsChange} />
-            </div>
-          </div>
-        </div>
         <div className="map">
           <MapGL
             {...viewport}
@@ -214,16 +203,27 @@ export default class App extends Component {
             mapboxApiAccessToken={MAPBOX_TOKEN} >
           </MapGL>
         </div>
-        <div className="details bg-white">
-            {this.state.selectedParcel ? 
+        <div className="sidebar">
+          <Header />
+          <AddressSearch onSelect={this.onSearchSelect} />
+          <div className="pa2">
+            <span className="db f5 fw7 bb">Map layers</span>
+            <div className="pv2" style={{display: 'flex', flexDirection: 'row'}}>
+              <LayerSwitch name='zoning' defaultChecked onChange={this._onZoningChange} />
+              <LayerSwitch name='satellite' defaultChecked onChange={this._onSatelliteChange} />
+              <LayerSwitch name='roads' defaultChecked={false} onChange={this._onRoadsChange} />
+            </div>
+          </div>
+          {this.state.selectedParcel ? 
               <ParcelDetails parcel={this.state.selectedParcel} /> : `Click a parcel.`}
             {this.state.showZoningLegend ? (
               <div className="pa2">
               <span className="db f5 fw7 bb">Zoning classifications</span>
-              <div className="h5 overflow-scroll">
+              <div className="pa2" style={{display: 'flex', flexWrap: 'wrap', justifyContent: 'stretch' }}>
               {Object.keys(Zones).map(z => 
                 <ZoningClass zone={z}/>           
               )}</div></div>) : null}
+          <Footer source='https://data.detroitmi.gov/d/dxgi-9s8s' />
         </div>
       </div>
     );

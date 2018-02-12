@@ -22,7 +22,7 @@ class ParcelDetailTable extends React.Component {
     }
     return (
       (
-        <div style={{display: 'flex'}}>
+        <div>
         <table>
           {Object.keys(data).map(k => (
             <tr>
