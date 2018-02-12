@@ -4,10 +4,14 @@ import React, {Component} from 'react';
 import MapGL from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {defaultMapStyle} from './map-style.js';
+import _ from 'lodash';
+
+import centroid from '@turf/centroid';
 
 import ParcelDetails from './components/ParcelDetails';
 import AddressSearch from './components/AddressSearch';
 import Header from './components/Header';
+import LayerSwitch from './components/LayerSwitch';
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiY2l0eW9mZGV0cm9pdCIsImEiOiJjaXZvOWhnM3QwMTQzMnRtdWhyYnk5dTFyIn0.FZMFi0-hvA60KYnI-KivWg'; // Set your mapbox token here
 
@@ -23,8 +27,8 @@ export default class App extends Component {
         zoom: 16,
         bearing: 0,
         pitch: 0,
-        width: 500,
-        height: 500
+        width: window.innerWidth,
+        height: window.innerHeight
       },
       settings: {
         dragPan: true,
@@ -44,6 +48,8 @@ export default class App extends Component {
     }
 
     this.onSearchSelect = this.onSearchSelect.bind(this)
+    this._onZoningChange = this._onZoningChange.bind(this)
+    this._onRoadsChange = this._onRoadsChange.bind(this)
   }
 
   fetchData(parcelno) {
@@ -52,10 +58,6 @@ export default class App extends Component {
     .then(d => {
       this.setState({
         selectedParcelDetails: d[0],
-        viewport: { ...this.state.viewport,
-          latitude: parseFloat(d[0].latitude, 10),
-          longitude: parseFloat(d[0].longitude, 10),
-        }
       })
       this.highlightParcel(this.state.selectedParcel)
     })
@@ -85,7 +87,7 @@ export default class App extends Component {
     let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'parcels-highlight')
     style = style.setIn(['layers', layerIndex, 'filter', 2], parcelno)
     this.setState({
-      mapStyle: style
+      mapStyle: style,
     })
   }
 
@@ -99,6 +101,7 @@ export default class App extends Component {
 
   componentWillReceiveProps(nextProps) {
     console.log(nextProps)
+    this.fetchData(nextProps.match.params.name)
   }
 
   componentWillUnmount() {
@@ -109,24 +112,60 @@ export default class App extends Component {
     this.setState({
       viewport: {
         ...this.state.viewport,
-        width: this.props.width || (window.innerWidth * 4 / 6),
-        height: this.props.height || window.innerHeight - 75
+        width: ( window.outerWidth * 7) / 10,
+        height: window.innerHeight
       }
     });
   };
 
   _onClick = (event) => {
     if(event.features.length > 0) {
-      console.log(event.features[0])
+      const center = centroid(event.features[0]).geometry.coordinates
       this.highlightParcel(event.features[0].properties.parcelno)
       this.props.history.push(`/${event.features[0].properties.parcelno}`)
       this.setState({
-        selectedParcel: event.features[0].properties.parcelno
+        selectedParcel: event.features[0].properties.parcelno,
+        viewport: {
+          ...this.state.viewport,
+          latitude: center[1],
+          longitude: center[0]
+        }
       })
     }
   } 
 
   _onViewportChange = viewport => this.setState({viewport});
+
+  _onZoningChange = (checked) => {
+    let style = this.state.mapStyle
+    let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'zoning')
+    style = style.setIn(['layers', layerIndex, 'layout', 'visibility'], checked ? 'visible' : 'none')     
+    this.setState({
+      mapStyle: style
+    })
+  }
+
+  _onRoadsChange = (checked) => {
+    let style = this.state.mapStyle
+    _.forEach(style.toJS().layers, (l, i) => {
+      (console.log(l, i))
+      if(l['source-layer'] === 'road') {
+        style = style.setIn(['layers', i, 'layout', 'visibility'], checked ? 'visible' : 'none')
+      }
+    })
+    this.setState({
+      mapStyle: style
+    })
+  }
+
+  _onSatelliteChange = (checked) => {
+    let style = this.state.mapStyle
+    let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'mapbox-mapbox-satellite')
+    style = style.setIn(['layers', layerIndex, 'layout', 'visibility'], checked ? 'visible' : 'none')     
+    this.setState({
+      mapStyle: style
+    })
+  }
 
   render() {
 
@@ -134,9 +173,12 @@ export default class App extends Component {
 
     return (
       <div className="App">
-        <div className="header pb2">
+        <div className="header">
           <Header />
           <AddressSearch onSelect={this.onSearchSelect} />
+          <LayerSwitch name='zoning' onChange={this._onZoningChange}/>
+          <LayerSwitch name='satellite' onChange={this._onSatelliteChange}/>
+          <LayerSwitch name='roads' onChange={this._onRoadsChange}/>
         </div>
         <div className="map">
           <MapGL

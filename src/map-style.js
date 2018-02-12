@@ -20,6 +20,7 @@ MAP_STYLE.layers.splice(
     type: 'fill',
     source: 'zoning',
     'source-layer': 'zoninggeojson',
+    layout: {"visibility": "visible"},
     paint: {
         "fill-color": {
             property: "zoning_rev",
@@ -27,10 +28,9 @@ MAP_STYLE.layers.splice(
             stops: _.zip(_.keys(Zones), _.map(Zones, 'color'))
             },
             "fill-opacity": {
-            stops: [[10, 0.3], [15, 0.6], [20, 0.9]]
+            stops: [[10, 0.5], [15, 0.7], [16, 0.8], [18, 0.12]]
             }
-    },
-    filter: ['==', 'zoning_rev', '']
+    }
   }
 );
 

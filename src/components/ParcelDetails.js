@@ -35,7 +35,7 @@ class ParcelDetails extends Component {
   render() {
     return (
       <div className="pa2">
-        <span className="db f7 fw7 bb">Parcel number: {this.props.parcel}</span>
+        <span className="db f5 fw7 bb">Parcel number: {this.props.parcel}</span>
         <ParcelDetailTable parcel={this.state.parcel} />
       </div>
     )

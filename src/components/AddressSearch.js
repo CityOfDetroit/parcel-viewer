@@ -4,10 +4,6 @@ import { AutoComplete } from 'antd';
 import 'antd/lib/auto-complete/style/css';
 import _ from 'lodash';
 
-function onSelect(value) {
-  console.log('onSelect', value);
-}
-
 class AddressSearch extends React.Component {
   state = {
     dataSource: [],
