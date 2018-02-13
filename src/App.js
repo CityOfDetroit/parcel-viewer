@@ -55,7 +55,6 @@ export default class App extends Component {
 
     this.onSearchSelect = this.onSearchSelect.bind(this)
     this._onZoningChange = this._onZoningChange.bind(this)
-    this._onRoadsChange = this._onRoadsChange.bind(this)
   }
 
   fetchData(parcelno) {
@@ -164,22 +163,15 @@ export default class App extends Component {
     })
   }
 
-  _onRoadsChange = (checked) => {
-    let style = this.state.mapStyle
-    _.forEach(style.toJS().layers, (l, i) => {
-      if(l['source-layer'] === 'road') {
-        style = style.setIn(['layers', i, 'layout', 'visibility'], checked ? 'visible' : 'none')
-      }
-    })
-    this.setState({
-      mapStyle: style
-    })
-  }
-
   _onSatelliteChange = (checked) => {
     let style = this.state.mapStyle
     let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'satellite')
-    style = style.setIn(['layers', layerIndex, 'layout', 'visibility'], checked ? 'visible' : 'none')     
+    style = style.setIn(['layers', layerIndex, 'layout', 'visibility'], checked ? 'visible' : 'none')  
+    _.forEach(style.toJS().layers, (l, i) => {
+      if(l['source-layer'] === 'road') {
+        style = style.setIn(['layers', i, 'layout', 'visibility'], checked ? 'none' : 'visible')
+      }
+    })   
     this.setState({
       mapStyle: style
     })
@@ -221,7 +213,6 @@ export default class App extends Component {
             <div className="pv2" style={{display: 'flex', flexDirection: 'row'}}>
               <LayerSwitch name='zoning' defaultChecked onChange={this._onZoningChange} />
               <LayerSwitch name='satellite' defaultChecked onChange={this._onSatelliteChange} />
-              <LayerSwitch name='roads' defaultChecked={false} onChange={this._onRoadsChange} />
             </div>
           </div>
           {this.state.selectedParcel ? 

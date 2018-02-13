@@ -98,7 +98,7 @@
             "type": "background",
             "layout": {},
             "paint": {
-                "background-color": "rgba(0,0,0,0.5)"
+                "background-color": "rgba(0,0,0,0.1)"
             }
         },
         {
@@ -107,7 +107,7 @@
             "source": "mapbox://mapbox.satellite",
             "layout": {},
             "paint": {
-                "raster-opacity": 0.75
+                "raster-opacity": 0.6
             },
             "interactive": true
         },
@@ -1719,107 +1719,6 @@
                                 0.15,
                                 0.15
                             ]
-                        ]
-                    ]
-                }
-            }
-        },
-        {
-            "id": "tunnel-path",
-            "type": "line",
-            "metadata": {
-                "mapbox:group": "1444855769305.6016"
-            },
-            "source": "composite",
-            "source-layer": "road",
-            "filter": [
-                "all",
-                [
-                    "==",
-                    "$type",
-                    "LineString"
-                ],
-                [
-                    "all",
-                    [
-                        "!=",
-                        "type",
-                        "steps"
-                    ],
-                    [
-                        "==",
-                        "class",
-                        "path"
-                    ],
-                    [
-                        "==",
-                        "structure",
-                        "tunnel"
-                    ]
-                ]
-            ],
-            "layout": {
-                "line-join": "round",
-                "visibility": "none"
-            },
-            "paint": {
-                "line-width": {
-                    "base": 1.5,
-                    "stops": [
-                        [
-                            15,
-                            1
-                        ],
-                        [
-                            18,
-                            4
-                        ]
-                    ]
-                },
-                "line-dasharray": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            14,
-                            [
-                                1,
-                                0
-                            ]
-                        ],
-                        [
-                            15,
-                            [
-                                1.75,
-                                1
-                            ]
-                        ],
-                        [
-                            16,
-                            [
-                                1,
-                                0.75
-                            ]
-                        ],
-                        [
-                            17,
-                            [
-                                1,
-                                0.5
-                            ]
-                        ]
-                    ]
-                },
-                "line-color": "hsl(0, 0%, 85%)",
-                "line-opacity": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            14,
-                            0
-                        ],
-                        [
-                            14.25,
-                            1
                         ]
                     ]
                 }
@@ -3891,110 +3790,6 @@
             }
         },
         {
-            "id": "road-path",
-            "type": "line",
-            "metadata": {
-                "mapbox:group": "1444855786460.0557"
-            },
-            "source": "composite",
-            "source-layer": "road",
-            "filter": [
-                "all",
-                [
-                    "==",
-                    "$type",
-                    "LineString"
-                ],
-                [
-                    "all",
-                    [
-                        "!in",
-                        "structure",
-                        "bridge",
-                        "tunnel"
-                    ],
-                    [
-                        "!in",
-                        "type",
-                        "crossing",
-                        "sidewalk",
-                        "steps"
-                    ],
-                    [
-                        "==",
-                        "class",
-                        "path"
-                    ]
-                ]
-            ],
-            "layout": {
-                "line-join": "round",
-                "visibility": "none"
-            },
-            "paint": {
-                "line-width": {
-                    "base": 1.5,
-                    "stops": [
-                        [
-                            15,
-                            1
-                        ],
-                        [
-                            18,
-                            4
-                        ]
-                    ]
-                },
-                "line-color": "#fff",
-                "line-dasharray": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            14,
-                            [
-                                1,
-                                0
-                            ]
-                        ],
-                        [
-                            15,
-                            [
-                                1.75,
-                                1
-                            ]
-                        ],
-                        [
-                            16,
-                            [
-                                1,
-                                0.75
-                            ]
-                        ],
-                        [
-                            17,
-                            [
-                                1,
-                                0.5
-                            ]
-                        ]
-                    ]
-                },
-                "line-opacity": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            14,
-                            0
-                        ],
-                        [
-                            14.25,
-                            1
-                        ]
-                    ]
-                }
-            }
-        },
-        {
             "id": "road-steps",
             "type": "line",
             "metadata": {
@@ -5745,107 +5540,6 @@
                                 0.15,
                                 0.15
                             ]
-                        ]
-                    ]
-                }
-            }
-        },
-        {
-            "id": "bridge-path",
-            "type": "line",
-            "metadata": {
-                "mapbox:group": "1444855799204.86"
-            },
-            "source": "composite",
-            "source-layer": "road",
-            "filter": [
-                "all",
-                [
-                    "==",
-                    "$type",
-                    "LineString"
-                ],
-                [
-                    "all",
-                    [
-                        "!=",
-                        "type",
-                        "steps"
-                    ],
-                    [
-                        "==",
-                        "class",
-                        "path"
-                    ],
-                    [
-                        "==",
-                        "structure",
-                        "bridge"
-                    ]
-                ]
-            ],
-            "layout": {
-                "line-join": "round",
-                "visibility": "none"
-            },
-            "paint": {
-                "line-width": {
-                    "base": 1.5,
-                    "stops": [
-                        [
-                            15,
-                            1
-                        ],
-                        [
-                            18,
-                            4
-                        ]
-                    ]
-                },
-                "line-color": "#fff",
-                "line-dasharray": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            14,
-                            [
-                                1,
-                                0
-                            ]
-                        ],
-                        [
-                            15,
-                            [
-                                1.75,
-                                1
-                            ]
-                        ],
-                        [
-                            16,
-                            [
-                                1,
-                                0.75
-                            ]
-                        ],
-                        [
-                            17,
-                            [
-                                1,
-                                0.5
-                            ]
-                        ]
-                    ]
-                },
-                "line-opacity": {
-                    "base": 1,
-                    "stops": [
-                        [
-                            14,
-                            0
-                        ],
-                        [
-                            14.25,
-                            1
                         ]
                     ]
                 }
@@ -7660,7 +7354,7 @@
             },
             "paint": {
                 "line-color": {
-                    "stops": [[14, "#fff"], [17, "#eee"], [17.1, "#444"], [18, "#333"]]
+                    "stops": [[14, "#222"], [17, "#333"], [17.1, "#444"], [18, "#333"]]
                 },
                 "line-width": {
                     "base": 1,

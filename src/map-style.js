@@ -13,23 +13,26 @@ Object.assign(MAP_STYLE.sources, {
 
 // Insert custom layers before city labels
 MAP_STYLE.layers.splice(
-  MAP_STYLE.layers.findIndex(layer => layer.id === 'landcover_scrub'), 0,
+  MAP_STYLE.layers.findIndex(layer => layer.id === 'parcels'), 0,
   // Highlighted county polygons
   {
     id: 'zoning',
-    type: 'fill',
+    type: 'line',
     source: 'zoning',
     'source-layer': 'zoninggeojson',
     layout: {"visibility": "visible"},
     paint: {
-        "fill-color": {
+        "line-color": {
             property: "zoning_rev",
             type: "categorical",
             stops: _.zip(_.keys(Zones), _.map(Zones, 'color'))
             },
-            "fill-opacity": {
-            stops: [[10, 0.5], [15, 0.7], [16, 0.8], [18, 0.12]]
-            }
+        "line-width": {
+          stops: [[14,1], [19,15]]
+        },
+        "line-offset": {
+          stops: [[14, 0], [17, -1], [19, -6]]
+        }
     }
   }
 );

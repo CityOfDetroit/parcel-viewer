@@ -8,6 +8,14 @@ class ParcelDetailTable extends React.Component {
   render() {
     const parcel = this.props.parcel
 
+    if (parcel === undefined) {
+      return (
+        <div>
+          <span className="red fw5">Couldn't find record!</span>
+        </div>
+      );
+    }
+
     const data = {
       'Address': parcel.address,
       'Owner': parcel.owner1,
