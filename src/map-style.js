@@ -20,7 +20,7 @@ MAP_STYLE.layers.splice(
     type: 'line',
     source: 'zoning',
     'source-layer': 'zoninggeojson',
-    layout: {"visibility": "visible"},
+    layout: {"visibility": "none"},
     paint: {
         "line-color": {
             property: "zoning_rev",

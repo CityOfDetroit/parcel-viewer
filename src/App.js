@@ -211,7 +211,7 @@ export default class App extends Component {
           <div className="pa2">
             <span className="db f5 fw7 bb">Map layers</span>
             <div className="pv2" style={{display: 'flex', flexDirection: 'row'}}>
-              <LayerSwitch name='zoning' defaultChecked onChange={this._onZoningChange} />
+              <LayerSwitch name='zoning' defaultChecked={false} onChange={this._onZoningChange} />
               <LayerSwitch name='satellite' defaultChecked onChange={this._onSatelliteChange} />
             </div>
           </div>
