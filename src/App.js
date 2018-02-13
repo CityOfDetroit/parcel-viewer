@@ -49,7 +49,7 @@ export default class App extends Component {
       selectedParcel: this.props.match.params.name || null,
       selectedParcelDetails: null,
       mapStyle: defaultMapStyle,
-      showZoningLegend: true,
+      showZoningLegend: false,
       didAutolocate: false,
     }
 
@@ -224,7 +224,7 @@ export default class App extends Component {
               {Object.keys(Zones).map(z => 
                 <ZoningClass zone={z}/>           
               )}</div></div>) : null}
-          <Footer source='https://data.detroitmi.gov/d/dxgi-9s8s' />
+          <Footer />
         </div>
       </div>
     );
