@@ -18,7 +18,7 @@ class ParcelDetailTable extends React.Component {
 
     const data = {
       'Address': parcel.address,
-      'Owner': `${parcel.owner1} ${parcel.owner2 ? `& ${parcel.owner2}` : null }`,
+      'Owner': `${parcel.owner1}${parcel.owner2 ? ` & ${parcel.owner2}` : `` }`,
       'Owner Address': `${parcel.owner_street}, ${parcel.owner_city}, ${parcel.owner_state}`,
       'Last Sale Date': parcel.last_sale_date ? moment(parcel.last_sale_date).format('LL') : `No record`,
       'Last Sale Price': `$${_.parseInt(parcel.last_sale_price).toLocaleString()}` || `No record`,
