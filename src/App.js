@@ -143,7 +143,7 @@ export default class App extends Component {
     if(event.features.length > 0) {
       const center = centroid(event.features[0]).geometry.coordinates
       this.highlightParcel(event.features[0].properties.parcelno)
-      this.props.history.push(`/${event.features[0].properties.parcelno}`)
+      this.props.history.push(`/${event.features[0].properties.parcelno}/`)
       this.setState({
         selectedParcel: event.features[0].properties.parcelno,
       })
