@@ -7,6 +7,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import ReactGA from 'react-ga';
+import PropTypes from 'prop-types'
 ReactGA.initialize('UA-107915075-6');
 
 class GAListener extends React.Component {
