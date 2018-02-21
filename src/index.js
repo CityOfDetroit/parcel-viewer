@@ -31,13 +31,13 @@ class GAListener extends React.Component {
 }
 
 ReactDOM.render(
-  <GAListener>
-    <Router basename="/parcel-viewer">
+  <Router basename="/parcel-viewer">
+    <GAListener>
       <Switch>
         <Route exact path='/' component={App} />
         <Route path='/:name' component={App} />
       </Switch>
-    </Router>
-  </GAListener>,
+    </GAListener>
+  </Router>,
   document.getElementById('root'));
 registerServiceWorker();
