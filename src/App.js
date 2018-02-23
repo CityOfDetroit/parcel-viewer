@@ -14,7 +14,7 @@ import AddressSearch from './components/AddressSearch';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import LayerSwitch from './components/LayerSwitch';
-import ZoningClass from './components/ZoningClass.js'
+import ZoningClass from './components/ZoningClass'
 import Zones from './data/zones.js'
 
 const MAPBOX_TOKEN = 'pk.eyJ1IjoiY2l0eW9mZGV0cm9pdCIsImEiOiJjaXZvOWhnM3QwMTQzMnRtdWhyYnk5dTFyIn0.FZMFi0-hvA60KYnI-KivWg'; // Set your mapbox token here
