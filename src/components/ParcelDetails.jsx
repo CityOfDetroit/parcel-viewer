@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import ParcelDetailTable from './ParcelDetailTable'
+import Zones from '../data/zones';
 
 class ParcelDetails extends Component {
-
   constructor(props) {
     super(props)
+
     this.state = {
       parcel: {},
       fetchedData: false
@@ -15,11 +16,21 @@ class ParcelDetails extends Component {
     fetch(`https://data.detroitmi.gov/resource/snut-x2sy.json?parcelnum=${parcelno}`)
     .then(response => response.json())
     .then(d => {
+      this.lookupZone(d[0], Zones);
       this.setState({ 
-        parcel: d[0]
+        parcel: d[0],
+        fetchedData: true,
       })
     })
     .catch(e => console.log(e))
+  }
+
+  lookupZone(parcel, zones) {
+    let z = parcel.zoning
+
+    // add a new key/value to parcel
+    parcel.zoning_name = `${parcel.zoning}: ${zones[z].name}`
+    return parcel
   }
 
   componentDidMount() {
@@ -27,7 +38,7 @@ class ParcelDetails extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.parcel !== nextProps.parcel) {
+    if (this.props.parcel !== nextProps.parcel) {
       this.fetchData(nextProps.parcel)
     }
   }
@@ -36,7 +47,7 @@ class ParcelDetails extends Component {
     return (
       <div className="pa2">
         <span className="db f5 fw7 bb">Parcel number: {this.props.parcel}</span>
-        <ParcelDetailTable parcel={this.state.parcel} />
+        { this.state.fetchedData ? <ParcelDetailTable parcel={this.state.parcel} /> : `` }
       </div>
     )
   }
