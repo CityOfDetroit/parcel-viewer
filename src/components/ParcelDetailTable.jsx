@@ -5,6 +5,7 @@ import _ from 'lodash'
 class ParcelDetailTable extends React.Component {
   render() {
     const parcel = this.props.parcel
+    console.log(parcel)
 
     if (parcel === undefined) {
       return (
@@ -26,7 +27,7 @@ class ParcelDetailTable extends React.Component {
       'Improved Value': `$${_.parseInt(parcel.improved_value).toLocaleString()}` || `No record`,
       'Depth x Frontage': `${parcel.depth} x ${parcel.frontage} ft`,
       'Total Acres': `${parcel.total_acres}`,
-      'Zoning': parcel.zoning,
+      'Zoning': parcel.zoning_name,
       '# of Buildings': parcel.num_buildings,
       'Legal Description': parcel.legaldesc,
     }
