@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ParcelDetailTable from './ParcelDetailTable'
-import Zones from '../data/zones';
 
 class ParcelDetails extends Component {
 

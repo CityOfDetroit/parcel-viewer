@@ -1,8 +1,7 @@
 
 import React from 'react';
-import { AutoComplete } from 'antd';
+import AutoComplete from 'antd/lib/auto-complete';
 import 'antd/lib/auto-complete/style/css';
-import _ from 'lodash';
 
 class AddressSearch extends React.Component {
   state = {
@@ -15,7 +14,7 @@ class AddressSearch extends React.Component {
       .then(r => r.json())
       .then(d => {
         this.setState({
-          dataSource: !value ? [] : _.map(d.suggestions, 'text')
+          dataSource: !value ? [] : d.suggestions.map(s => s.text)
         })
       })
     }

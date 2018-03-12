@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 import MapGL, { FlyToInterpolator } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {defaultMapStyle} from './map-style.js';
-import _ from 'lodash';
+import forEach from 'lodash/forEach';
 
 import centroid from '@turf/centroid';
 
@@ -90,6 +90,7 @@ export default class App extends Component {
       this.setState({
         selectedParcel: d.candidates[0].attributes['User_fld'],
       })
+      this.fetchData(d.candidates[0].attributes['User_fld'])
       this._goToParcel([d.candidates[0].location.x, d.candidates[0].location.y])
       this.highlightParcel(d.candidates[0].attributes['User_fld'])
       this.props.history.push(`/${d.candidates[0].attributes['User_fld']}`)
@@ -167,7 +168,7 @@ export default class App extends Component {
     let style = this.state.mapStyle
     let layerIndex = style.toJS().layers.findIndex(lyr => lyr.id === 'satellite')
     style = style.setIn(['layers', layerIndex, 'layout', 'visibility'], checked ? 'visible' : 'none')  
-    _.forEach(style.toJS().layers, (l, i) => {
+    forEach(style.toJS().layers, (l, i) => {
       if(l['source-layer'] === 'road') {
         style = style.setIn(['layers', i, 'layout', 'visibility'], checked ? 'none' : 'visible')
       }
