@@ -4,6 +4,12 @@ import Zones from '../data/zones';
 
 class ParcelDetails extends Component {
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props.parcel === nextProps.parcel && this.props.parcelDetails === {}) {
+      return false
+    }
+    return true
+  }
   render() {
     return (
       <div className="pa2">

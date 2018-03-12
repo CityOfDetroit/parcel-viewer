@@ -50,6 +50,7 @@
     "react-map-gl": "^3.2.1",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
+    "source-map-explorer": "^1.5.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "tachyons": "^4.9.1",
@@ -61,6 +62,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "node scripts/start.js",
