@@ -5,7 +5,6 @@ import MapGL, { FlyToInterpolator } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import {defaultMapStyle} from './map-style.js';
 import _ from 'lodash';
-import * as d3 from 'd3';
 
 import centroid from '@turf/centroid';
 
@@ -147,6 +146,7 @@ export default class App extends Component {
       this.setState({
         selectedParcel: event.features[0].properties.parcelno,
       })
+      this.fetchData(event.features[0].properties.parcelno)
       this._goToParcel(center)
     }
   } 
@@ -184,7 +184,6 @@ export default class App extends Component {
       latitude: coords[1],
       transitionDuration: 250,
       transitionInterpolator: new FlyToInterpolator(),
-      transitionEasing: d3.easeCubic
   };
     this.setState({viewport})
   }
@@ -216,7 +215,7 @@ export default class App extends Component {
             </div>
           </div>
           {this.state.selectedParcel ? 
-              <ParcelDetails parcel={this.state.selectedParcel} /> : `Click a parcel.`}
+              <ParcelDetails parcel={this.state.selectedParcel} parcelDetails={this.state.selectedParcelDetails} /> : `Click a parcel.`}
             {this.state.showZoningLegend ? (
               <div className="pa2">
               <span className="db f5 fw7 bb">Zoning classifications</span>

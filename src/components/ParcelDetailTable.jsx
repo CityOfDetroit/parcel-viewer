@@ -1,6 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 import _ from 'lodash'
+import Zones from '../data/zones.js'
 
 class ParcelDetailTable extends React.Component {
   render() {
@@ -11,6 +12,14 @@ class ParcelDetailTable extends React.Component {
       return (
         <div>
           <span className="red fw5">Couldn't find record!</span>
+        </div>
+      );
+    }
+
+    if (parcel === null) {
+      return (
+        <div>
+          <span className="red fw5">Loading....</span>
         </div>
       );
     }
@@ -27,7 +36,7 @@ class ParcelDetailTable extends React.Component {
       'Improved Value': `$${_.parseInt(parcel.improved_value).toLocaleString()}` || `No record`,
       'Depth x Frontage': `${parcel.depth} x ${parcel.frontage} ft`,
       'Total Acres': `${parcel.total_acres}`,
-      'Zoning': parcel.zoning_name,
+      'Zoning': `${parcel.zoning} ${Zones[parcel.zoning].name}`,
       '# of Buildings': parcel.num_buildings,
       'Legal Description': parcel.legaldesc,
     }
