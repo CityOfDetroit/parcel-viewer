@@ -31,7 +31,7 @@ class GAListener extends React.Component {
 }
 
 ReactDOM.render(
-  <Router basename="/parcel-viewer">
+  <Router>
     <GAListener>
       <Switch>
         <Route exact path='/' component={App} />
