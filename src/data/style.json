@@ -81,7 +81,7 @@
     "pitch": 0,
     "sources": {
         "composite": {
-            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,cityofdetroit.5kwrqmxx,cityofdetroit.d9h31wp8,cityofdetroit.4pyiqqv4",
+            "url": "mapbox://mapbox.mapbox-terrain-v2,mapbox.mapbox-streets-v7,cityofdetroit.5kwrqmxx,cityofdetroit.d9h31wp8,cityofdetroit.assessor_parcels",
             "type": "vector"
         },
         "mapbox://mapbox.satellite": {
@@ -7342,7 +7342,7 @@
             "type": "line",
             "metadata": {},
             "source": "composite",
-            "source-layer": "assessor_parcels-50m4yu",
+            "source-layer": "assessor_parcels",
             "minzoom": 11,
             "filter": [
                 "==",
@@ -7391,7 +7391,7 @@
             "type": "line",
             "metadata": {},
             "source": "composite",
-            "source-layer": "assessor_parcels-50m4yu",
+            "source-layer": "assessor_parcels",
             "minzoom": 15,
             "filter": ["==", "parcelno", ""],
             "layout": {
@@ -7441,7 +7441,7 @@
             "type": "fill",
             "metadata": {},
             "source": "composite",
-            "source-layer": "assessor_parcels-50m4yu",
+            "source-layer": "assessor_parcels",
             "interactive": true,
             "minzoom": 15,
             "filter": [
