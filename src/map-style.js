@@ -1,6 +1,8 @@
 import {fromJS} from 'immutable';
 import MAP_STYLE from './data/style.json';
-import _ from 'lodash';
+import zip from 'lodash/zip';
+import keys from 'lodash/keys';
+import map from 'lodash/map';
 import Zones from './data/zones.js'
 
 // Add the vector tile source for counties
@@ -25,7 +27,7 @@ MAP_STYLE.layers.splice(
         "line-color": {
             property: "zoning_rev",
             type: "categorical",
-            stops: _.zip(_.keys(Zones), _.map(Zones, 'color'))
+            stops: zip(keys(Zones), map(Zones, 'color'))
             },
         "line-width": {
           stops: [[14,1], [19,15]]
