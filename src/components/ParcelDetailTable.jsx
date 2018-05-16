@@ -37,7 +37,7 @@ class ParcelDetailTable extends React.Component {
       'Improved Value': `$${parseInt(parcel.improved_value).toLocaleString()}` || `No record`,
       'Depth x Frontage': `${parcel.depth} x ${parcel.frontage} ft`,
       'Total Acres': `${parcel.total_acres}`,
-      'Zoning': `${parcel.zoning} ${Zones[parcel.zoning].name}`,
+      'Zoning': parcel.zoning ? `${parcel.zoning} ${Zones[parcel.zoning].name}` : `No record`,
       '# of Buildings': parcel.num_buildings,
       'Legal Description': parcel.legaldesc,
     }
