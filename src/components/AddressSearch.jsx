@@ -6,6 +6,7 @@ import 'antd/lib/auto-complete/style/css';
 class AddressSearch extends React.Component {
   state = {
     dataSource: [],
+    value: ""
   }
 
   suggestAddress(value) {
@@ -14,7 +15,7 @@ class AddressSearch extends React.Component {
       .then(r => r.json())
       .then(d => {
         this.setState({
-          dataSource: !value ? [] : d.suggestions.map(s => s.text)
+          dataSource: d.suggestions.length < 1 ? [value] : d.suggestions.map(s => s.text)
         })
       })
     }
@@ -22,6 +23,7 @@ class AddressSearch extends React.Component {
 
   handleSearch = (value) => {
     this.suggestAddress(value)
+    this.setState({value})
   }
 
   render() {

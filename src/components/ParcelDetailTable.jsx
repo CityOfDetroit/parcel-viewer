@@ -6,7 +6,6 @@ import Zones from '../data/zones.js'
 class ParcelDetailTable extends React.Component {
   render() {
     const parcel = this.props.parcel
-    console.log(parcel)
 
     if (parcel === undefined) {
       return (

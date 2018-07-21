@@ -22,7 +22,11 @@ MAP_STYLE.layers.splice(
     type: 'line',
     source: 'zoning',
     'source-layer': 'zoninggeojson',
-    layout: {"visibility": "none"},
+    layout: {
+      "visibility": "none", 
+      "line-cap": "round",
+      "line-join": "round"
+    },
     paint: {
         "line-color": {
             property: "zoning_rev",
@@ -33,7 +37,7 @@ MAP_STYLE.layers.splice(
           stops: [[14,1], [19,15]]
         },
         "line-offset": {
-          stops: [[14, 0], [17, -1], [19, -6]]
+          stops: [[14, 0], [17, -.5], [19, -6]]
         }
     }
   }

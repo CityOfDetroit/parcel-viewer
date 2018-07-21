@@ -83,17 +83,25 @@ export default class App extends Component {
   }
 
   onSearchSelect(value) {
-    fetch(`https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/findAddressCandidates?Single+Line+Input=${value}&outSR=4326&outFields=*&f=pjson`)
+    console.log(value)
+    const url = `https://gis.detroitmi.gov/arcgis/rest/services/DoIT/CompositeGeocoder/GeocodeServer/findAddressCandidates?SingleLine=${value}&outSR=4326&outFields=*&f=pjson`
+    console.log(url)
+    fetch(url)
     .then(r => r.json())
     .then(d => {
-      console.log(d)
-      this.setState({
-        selectedParcel: d.candidates[0].attributes['User_fld'],
-      })
-      this.fetchData(d.candidates[0].attributes['User_fld'])
-      this._goToParcel([d.candidates[0].location.x, d.candidates[0].location.y])
-      this.highlightParcel(d.candidates[0].attributes['User_fld'])
-      this.props.history.push(`/${d.candidates[0].attributes['User_fld']}`)
+      if(d.candidates[0].attributes['User_fld']) {
+        this.setState({
+          selectedParcel: d.candidates[0].attributes['User_fld'],
+        })
+        this.fetchData(d.candidates[0].attributes['User_fld'])
+        this._goToCoords(d.candidates[0].location)
+        this.highlightParcel(d.candidates[0].attributes['User_fld'])
+        this.props.history.push(`/${d.candidates[0].attributes['User_fld']}`)
+      }
+      else {
+        console.log(d)
+        this._goToCoords(d.candidates[0].location)
+      }
     })
   }
 
@@ -133,7 +141,7 @@ export default class App extends Component {
         viewport: {
           ...this.state.viewport,
           width: window.innerWidth,
-          height: window.innerHeight * 3 / 10 
+          height: window.innerHeight * 4 / 10 
         }
       });
     }
@@ -148,7 +156,7 @@ export default class App extends Component {
         selectedParcel: event.features[0].properties.parcelno,
       })
       this.fetchData(event.features[0].properties.parcelno)
-      this._goToParcel(center)
+      this._goToCoords({x:center[0], y:center[1]})
     }
   } 
 
@@ -178,11 +186,11 @@ export default class App extends Component {
     })
   }
 
-  _goToParcel = (coords) => {
+  _goToCoords = (coords) => {
     const viewport = {
       ...this.state.viewport,
-      longitude: coords[0],
-      latitude: coords[1],
+      longitude: coords['x'],
+      latitude: coords['y'],
       transitionDuration: 250,
       transitionInterpolator: new FlyToInterpolator(),
   };
@@ -216,7 +224,19 @@ export default class App extends Component {
             </div>
           </div>
           {this.state.selectedParcel ? 
-              <ParcelDetails parcel={this.state.selectedParcel} parcelDetails={this.state.selectedParcelDetails} /> : `Click a parcel.`}
+              <ParcelDetails 
+                parcel={this.state.selectedParcel} 
+                parcelDetails={this.state.selectedParcelDetails} 
+              /> 
+              : 
+              <div className="fw7 pa2">
+                To get started:
+                  <ul>
+                    <li>Select a parcel on the map</li>
+                    <li>Enter an address in the search bar</li>
+                  </ul>
+              </div>
+          }
             {this.state.showZoningLegend ? (
               <div className="pa2">
               <span className="db f5 fw7 bb">Zoning classifications</span>
