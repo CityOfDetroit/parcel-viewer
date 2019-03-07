@@ -7342,7 +7342,7 @@
             "type": "line",
             "metadata": {},
             "source": "composite",
-            "source-layer": "assessor_parcels",
+            "source-layer": "parcel_map_mapbox",
             "minzoom": 11,
             "filter": [
                 "==",
@@ -7391,7 +7391,7 @@
             "type": "line",
             "metadata": {},
             "source": "composite",
-            "source-layer": "assessor_parcels",
+            "source-layer": "parcel_map_mapbox",
             "minzoom": 15,
             "filter": ["==", "parcelno", ""],
             "layout": {
@@ -7441,7 +7441,7 @@
             "type": "fill",
             "metadata": {},
             "source": "composite",
-            "source-layer": "assessor_parcels",
+            "source-layer": "parcel_map_mapbox",
             "interactive": true,
             "minzoom": 15,
             "filter": [
