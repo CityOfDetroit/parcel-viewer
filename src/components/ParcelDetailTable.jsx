@@ -24,21 +24,20 @@ class ParcelDetailTable extends React.Component {
     }
 
     const data = {
-      'Address': parcel.address,
-      'Owner': `${parcel.owner1}`,
-      'Owner (ext.)': `${parcel.owner2 ? `${parcel.owner2}` : ``}`,
-      'Owner Address': `${parcel.owner_street}, ${parcel.owner_city}, ${parcel.owner_state}`,
-      'Last Sale Date': parcel.last_sale_date ? moment(parcel.last_sale_date).format('LL') : `No record`,
-      'Last Sale Price': `$${parseInt(parcel.last_sale_price).toLocaleString()}` || `No record`,
-      'Taxable Status': `${parcel.taxable_status}` || `Unknown`,
-      'Taxable Value': `$${parseInt(parcel.taxable_value).toLocaleString()}` || `No record`,
-      'Land Value': `$${parseInt(parcel.land_value).toLocaleString()}` || `No record`,
-      'Improved Value': `$${parseInt(parcel.improved_value).toLocaleString()}` || `No record`,
-      'Depth x Frontage': `${parcel.depth} x ${parcel.frontage} ft`,
-      'Total Acres': `${parcel.total_acres}`,
-      'Zoning': parcel.zoning ? `${parcel.zoning} ${Zones[parcel.zoning].name}` : `No record`,
-      '# of Buildings': parcel.num_buildings,
-      'Legal Description': parcel.legaldesc,
+      'Address': parcel.ADDRESS,
+      'Owner': `${parcel.OWNER1}`,
+      'Owner (ext.)': `${parcel.OWNER2 ? `${parcel.OWNER2}` : ``}`,
+      'Owner Address': `${parcel.OWN_STREET}, ${parcel.OWN_CITY}, ${parcel.OWN_STATE}`,
+      'Last Sale Date': parcel.SALE_DATE && parcel.SALE_DATE !== " " ? moment(parcel.SALE_DATE).format('LL') : `No record`,
+      'Last Sale Price': `$${parseInt(parcel.SALE_PRICE).toLocaleString()}` || `No record`,
+      'Taxable Status': `${parcel.TAX_STATUS}` || `Unknown`,
+      'Taxable Value': `$${parseInt(parcel.TXBL_VAL).toLocaleString()}` || `No record`,
+      'Land Value': `$${parseInt(parcel.LAND_VALUE).toLocaleString()}` || `No record`,
+      'Improved Value': `$${parseInt(parcel.IMP_VALUE).toLocaleString()}` || `No record`,
+      'Depth x Frontage': `${parcel.DEPTH} x ${parcel.FRONTAGE} ft`,
+      'Total Acres': `${parcel.TOTAL_ACRE}`,
+      'Zoning': parcel.ZONING ? `${parcel.ZONING} ${Zones[parcel.ZONING].name}` : `No record`,
+      '# of Buildings': parcel.NUM_BLDGS
     }
 
     return (

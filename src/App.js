@@ -57,23 +57,24 @@ export default class App extends Component {
   }
 
   fetchData(parcelno) {
-    fetch(`https://data.detroitmi.gov/resource/snut-x2sy.json?parcelnum=${this.state.selectedParcel}`)
+    fetch(`https://services2.arcgis.com/qvkbeam7Wirps6zC/arcgis/rest/services/assessor_parcels_opendata/FeatureServer/0/query?where=parcelnum%3D'${this.state.selectedParcel}'&outSR=4326&returnCentroid=true&outFields=*&f=pjson`)
     .then(response => response.json())
     .then(d => {
+      console.log(d)
       if(this.props.match.params.name && !this.didAutolocate) {
         this.setState({
-          selectedParcelDetails: d[0],
+          selectedParcelDetails: d.features[0].attributes,
           didAutolocate: true,
           viewport: {
             ...this.state.viewport,
-            latitude: d[0].location.coordinates[1],
-            longitude: d[0].location.coordinates[0],
+            latitude: d.features[0].centroid.y,
+            longitude: d.features[0].centroid.x,
           }
         })
       }
       else {
         this.setState({
-          selectedParcelDetails: d[0]
+          selectedParcelDetails: d.features[0].attributes
         })
       }
 
