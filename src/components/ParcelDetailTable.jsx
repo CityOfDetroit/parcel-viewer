@@ -36,7 +36,7 @@ class ParcelDetailTable extends React.Component {
       'Improved Value': `$${parseInt(parcel.IMP_VALUE).toLocaleString()}` || `No record`,
       'Depth x Frontage': `${parcel.DEPTH} x ${parcel.FRONTAGE} ft`,
       'Total Acres': `${parcel.TOTAL_ACRE}`,
-      'Zoning': parcel.ZONING ? `${parcel.ZONING} ${Zones[parcel.ZONING].name}` : `No record`,
+      'Zoning': parcel.ZONING && Object.keys(Zones).indexOf(parcel.ZONING) > -1 ? `${parcel.ZONING} ${Zones[parcel.ZONING].name}` : `No record`,
       '# of Buildings': parcel.NUM_BLDGS
     }
 
