@@ -1,33 +1,161 @@
-@import "tachyons";
-
-@media screen and (max-width: 650px) {
-  .App {
-    overflow-x: hidden;
-  }
+body,
+html {
+  padding      : 0;
+  margin       : 0;
+  font-size    : 1em;
+  /* background: rgb(242,242,242); */
 }
 
+h1 {
+  font-family  : "Montserrat", sans-serif;
+  font-weight  : 900;
+  border-bottom: 5px solid rgb(254, 183, 13);
+}
 
-@media screen and (min-width: 650px) {
-  .App {
-    display: grid;
-    grid-template: repeat(12, 1fr) / repeat(10, 1fr);
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Roboto Condensed', sans-serif;
-  }
-  
-  .map {
-    grid-column: 4/11;
-    grid-row: 1/7;
-    z-index: 1;
-  }
-  
-  .sidebar {
-    grid-column: 1/4;
-    grid-row: 1/13;
-    z-index: 2;
-    background: rgba(255,255,255,1);
-    overflow-y: scroll;
-  }
+h2 {
+  font-family  : "Montserrat", sans-serif;
+  font-weight  : 800;
+  border-bottom: 5px solid #feb70d;
+  /* font-size : 12px; */
+}
+
+h3,
+h4 {
+  font-family  : "Montserrat", sans-serif;
+  font-weight  : 700;
+  border-bottom: 5px solid #feb70d;
+}
+
+p,
+ul {
+  font-family: "Montserrat";
+}
+
+label,
+input {
+  font-family: "Roboto Condensed";
+}
+
+.App,
+.MobileApp {
+  display: grid;
+  height : 100vh;
+}
+
+/* overall App grids */
+.App {
+  grid-template-columns: 45vw 55vw;
+  grid-template-rows   : auto 1fr 1fr;
+  grid-template-areas  : "t m""s m""s v";
+  width: 90vw;
+}
+
+.MobileApp {
+  grid-template-columns: 1fr;
+  grid-template-rows   : auto 43vh 1fr;
+  grid-template-areas  : "t""m""s";
+}
+
+/* header treatment */
+.MobileApp header {
+  grid-area: t;
+}
+
+.panels-area section {
+  margin-top: .25em;
+}
+
+/* Sidebar */
+
+#sidebar {
+  font-family: 'Roboto Condensed';
+}
+
+.App #sidebar {
+  grid-area: s;
+}
+
+/* Street View */
+
+#mly {
+  font-size: 12px;
+}
+
+.App .street-view {
+  grid-area: v;
+  height   : calc(49vh);
+  font-size: 12px;
+}
+
+.MobileApp .street-view {
+  grid-area: m;
+  height   : calc(42vh);
+  font-size: 1em;
+}
+
+/* Map settings */
+
+.map-view {
+  grid-area: m;
+}
+
+.App #map {
+  width : auto;
+  height: calc(49vh);
+}
+
+.MobileApp #map {
+  width : auto;
+  height: calc(42vh);
+}
+
+.MobileApp .details-table {
+  max-height: calc(50vh - 75px);
+}
+
+.details-section {
+  margin-bottom : 0.25em;
+  /* padding-top: 1rem; */
+}
+
+#sidebar table {
+  width    : 100%;
+  font-size: 1em;
+}
+
+#sidebar table tr td {
+  border-bottom: none !important;
+  padding      : 5px;
+}
+
+#sidebar table tr td:first-child {
+  width: 40%;
+}
+
+#sidebar table tbody tr:nth-child(even) {
+  background: rgb(242, 242, 242);
+}
+
+#sidebar table tbody tr td:first-child {
+  font-weight: 400;
+}
+
+.street-view select {
+  font-family: "Roboto Condensed";
+}
+
+.bg-det-gray {
+  background: rgb(242, 242, 242);
+}
+
+.bg-det-spirit-green {
+  background: rgb(39, 153, 137);
+}
+
+.bg-det-city-green {
+  background: rgb(0, 68, 69);
+}
+
+.bg-det-light-green {
+  background: rgb(159, 213, 179);
 }
