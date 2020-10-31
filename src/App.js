@@ -9,7 +9,7 @@ import ParcelExplorer from './ParcelExplorer';
 
 export default function App() {
   return (
-    <Router basename='/parcel-explorer'>
+    <Router basename='/parcel-viewer'>
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
