@@ -120,12 +120,18 @@ const Map = ({ parcel, setParcel, coords, width, height, children, svCoords, svB
   const [theMap, setTheMap] = useState(null);
   let history = useHistory();
 
+  let [xMin, yMin, xMax, yMax] = [-83.237803,42.355192,-82.910451,42.45023];
+  let xRandomOffset = (xMax - xMin) * Math.random()
+  let yRandomOffset = (yMax - yMin) * Math.random()
+  let xRandomCenter = xMin + xRandomOffset
+  let yRandomCenter = yMin + yRandomOffset
+
   useEffect(() => {
     var map = new mapboxgl.Map({
       container: "map", // container id
       style: mapStyle, // stylesheet location
-      center: coords ? [coords.y, coords.x] : [-83.0457, 42.331], // starting position [lng, lat]
-      zoom: 17.5, // starting zoom
+      center: coords ? [coords.y, coords.x] : [xRandomCenter, yRandomCenter], // starting position [lng, lat]
+      zoom: 14.5, // starting zoom
     });
 
     map.resize();
