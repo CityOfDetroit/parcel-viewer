@@ -45,7 +45,7 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
   };
 
   return (
-    <section className={`address-search py-2 px-2 bg-det-gray rounded w-full text-gray-${hasFocus ? 900 : 600}`}>
+    <section className={hasFocus ? `address-search py-2 px-2 bg-det-gray rounded w-full text-gray-900` : `address-search py-2 px-2 bg-det-gray rounded w-full text-gray-600`}>
 
       <div className="flex items-center">
         <input
