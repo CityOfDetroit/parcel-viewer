@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/parcel-viewer/static/css/main.9265c02a.chunk.css",
-    "main.js": "/parcel-viewer/static/js/main.ffeecbda.chunk.js",
-    "main.js.map": "/parcel-viewer/static/js/main.ffeecbda.chunk.js.map",
+    "main.css": "/parcel-viewer/static/css/main.ded985f6.chunk.css",
+    "main.js": "/parcel-viewer/static/js/main.17140d8c.chunk.js",
+    "main.js.map": "/parcel-viewer/static/js/main.17140d8c.chunk.js.map",
     "runtime~main.js": "/parcel-viewer/static/js/runtime~main.853d3f96.js",
     "runtime~main.js.map": "/parcel-viewer/static/js/runtime~main.853d3f96.js.map",
     "static/js/2.ef7fc0eb.chunk.js": "/parcel-viewer/static/js/2.ef7fc0eb.chunk.js",
     "static/js/2.ef7fc0eb.chunk.js.map": "/parcel-viewer/static/js/2.ef7fc0eb.chunk.js.map",
     "index.html": "/parcel-viewer/index.html",
-    "precache-manifest.6fe64b098c6da3679dcb731ecd8e14cc.js": "/parcel-viewer/precache-manifest.6fe64b098c6da3679dcb731ecd8e14cc.js",
+    "precache-manifest.9cad0e821fad6d48516446e82ee84ecc.js": "/parcel-viewer/precache-manifest.9cad0e821fad6d48516446e82ee84ecc.js",
     "service-worker.js": "/parcel-viewer/service-worker.js",
-    "static/css/main.9265c02a.chunk.css.map": "/parcel-viewer/static/css/main.9265c02a.chunk.css.map",
+    "static/css/main.ded985f6.chunk.css.map": "/parcel-viewer/static/css/main.ded985f6.chunk.css.map",
     "static/media/logo.png": "/parcel-viewer/static/media/logo.c5600d7e.png"
   }
 }
