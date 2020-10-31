@@ -1,19 +1,40 @@
-# parcel-viewer
+# Parcel Viewer
 
-Quickly lookup parcel information and zoning codes for properties in Detroit. 
+## About this tool
 
-[Parcel Points Ownership](https://data.detroitmi.gov/d/dxgi-9s8s) data come from our open data portal and update daily.
+This site serves as a simple front-end to the city of Detroit's parcel data, integrating information from the city's open data portal with the city's street view imagery from Mapillary.
 
-We're using [react-map-gl](https://github.com/uber/react-map-gl), [antd](https://ant.design/) UI components, and [Create React App](https://github.com/facebook/create-react-app). Create React App's default webpack configuration was ejected to use `react-map-gl`; [these instructions](https://github.com/zjhch123/react-map-gl-demo-with-create-react-app) were helpful for doing that.
+### Built with
 
-## Install
+- [create-react-app](https://create-react-app.dev/)
+- [mapbox-gl-js](https://docs.mapbox.com/mapbox-gl-js/api/)
+- [MapillaryJS](https://mapillary.github.io/mapillary-js/index.html)
+- [Tailwind CSS](https://tailwindcss.com/)
 
-Clone this repo, then run `npm install` or `yarn` to install dependencies
+## Getting started
 
-## Develop
+### Prerequisites
 
-`npm start` or `yarn start` starts the development server and opens `localhost:3000` in your browser
+- either `yarn` or `npm`
 
-## Deploy
+### Installation
 
-`npm deploy` or `yarn deploy` creates an optimized build and deploys to gh-pages
+1. Clone this repository: 
+```
+git clone https://github.com/CityOfDetroit/parcel-viewer.git
+```
+2. Install NPM packages: `yarn` or `npm install`
+3. Run the app: `yarn start` or `npm start`
+4. You should be able to access the app at `https://localhost:3000`
+
+## Roadmap
+
+See the [open issues]() for a list of proposed features
+
+## License
+
+Distributed under the MIT License. See LICENSE for more information.
+
+## Contact
+
+- Jimmy McBroom: [mcbroomj@detroitmi.gov](mailto:mcbroomj@detroitmi.gov)
