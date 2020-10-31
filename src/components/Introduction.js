@@ -56,7 +56,7 @@ const Introduction = ({ setInfo, showInfo }) => {
           using the date picker
         </li>
       </ul>
-      <IntroPara>Do you have feedback about this tool? We accept feedback and GitHub issues.</IntroPara>
+      <IntroPara>Do you have questions or comments about this tool? Tell us using our <a href="https://airtable.com/shrInZsfyRoJvq8GJ" className="underline text-gray-700 hover:text-blue-600">feedback form</a> or please open a <a href="https://github.com/CityOfDetroit/parcel-viewer/issues" className="underline text-gray-700 hover:text-blue-600">GitHub issue</a>.</IntroPara>
     </section>
   );
 };
