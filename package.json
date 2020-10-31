@@ -1,8 +1,8 @@
 {
   "name": "parcel-viewer",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
-  "homepage": "https://cityofdetroit.github.io/parcel-explorer",
+  "homepage": "https://cityofdetroit.github.io/parcel-viewer",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.30",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
