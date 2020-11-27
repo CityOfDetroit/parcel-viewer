@@ -172,7 +172,7 @@ const StreetView = ({ coords, width, height, setSvBearing, setSvCoords, children
         setCurrentKey(sorted[sorted.length - 1]);
       });
     }
-  }, [coords]);
+  }, [coords, mapillary]);
 
   useEffect(() => {
     if (mapillary) {
