@@ -50,7 +50,8 @@ const Introduction = ({ setInfo, showInfo }) => {
         You can also switch the map baselayer to <b>satellite imagery</b>
         <FontAwesomeIcon icon={faGlobe} className="mx-2" />
       </IntroPara>
-      <IntroPara>Do you have questions or comments about this tool? Tell us using our <a href="https://airtable.com/shrInZsfyRoJvq8GJ" className="underline text-gray-700 hover:text-blue-600">feedback form</a> or please open a <a href="https://github.com/CityOfDetroit/parcel-viewer/issues" className="underline text-gray-700 hover:text-blue-600">GitHub issue</a>.</IntroPara>
+      <IntroPara>Do you have questions or comments about this tool? Tell us using our 
+      {" "}<a href="https://airtable.com/shrInZsfyRoJvq8GJ" className="underline text-gray-700 hover:text-blue-600">feedback form</a> or please open a <a href="https://github.com/CityOfDetroit/parcel-viewer/issues" className="underline text-gray-700 hover:text-blue-600">GitHub issue</a>.</IntroPara>
     </section>
   );
 };

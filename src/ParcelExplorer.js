@@ -9,11 +9,14 @@ import Header from "./components/Header";
 import Introduction from "./components/Introduction";
 import Map from "./components/Map";
 import StreetView from "./components/StreetView";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faGithub} from '@fortawesome/free-brands-svg-icons'
 
 const SidebarFooter = () => {
   return (
-    <div className="absolute">
-      Hey
+    <div className="px-2 flex justify-between items-center bg-det-gray text-sm" style={{gridArea: 'f'}}>
+      <span>City of Detroit, 2020. <a href="https://airtable.com/shrInZsfyRoJvq8GJ" className="underline text-gray-700 hover:text-blue-600">feedback form</a></span>
+      <a href="https://www.github.com/CityOfDetroit/parcel-viewer/"><FontAwesomeIcon icon={faGithub} /></a>
     </div>
   )
 }
@@ -61,10 +64,9 @@ const ParcelExplorer = () => {
         <StreetView {...{ coords, width, height, setSvBearing, setSvCoords }} />
         )}
         {parcel && <Details {...{ parcel, setCoords, mobile }} />}
-        <SidebarFooter />
       </div>
+      <SidebarFooter />
       <div className="map-view">
-
       {((mobile && map) || !mobile) && (
         <Map {...{ parcel, setParcel, width, coords, svCoords, svBearing, showSv, showSatellite }} />
         )}
