@@ -9,7 +9,14 @@ import Header from "./components/Header";
 import Introduction from "./components/Introduction";
 import Map from "./components/Map";
 import StreetView from "./components/StreetView";
-import SVToggle from "./components/SVToggle";
+
+const SidebarFooter = () => {
+  return (
+    <div className="absolute">
+      Hey
+    </div>
+  )
+}
 
 const ParcelExplorer = () => {
   // get the parcel ID from the URL
@@ -25,17 +32,12 @@ const ParcelExplorer = () => {
   const [parcel, setParcel] = useState(pid ? pid : null);
   const [coords, setCoords] = useState(null);
   const [map, setMap] = useState(true);
+  const [showSv, setSv] = useState(false);
   const [svCoords, setSvCoords] = useState(null);
   const [svBearing, setSvBearing] = useState(null);
   const [showInfo, setInfo] = useState(mobile ? false : true)
   const [showSearch, setSearch] = useState(mobile ? false : true)
-
-  // TODO
-  const basemaps = {
-    Streets: "mapbox://styles/cityofdetroit/cke9czg0d5wfq1atbqtbwbt9e",
-    Satellite: "mapbox://styles/mapbox/satellite-v9",
-  };
-  const [basemap, setBasemap] = useState(basemaps.Streets);
+  const [showSatellite, setSatellite] = useState(false)
 
   // Roll our own media-query hook:
   useEffect(() => {
@@ -50,19 +52,24 @@ const ParcelExplorer = () => {
 
   return (
     <div className={!mobile ? "App" : "MobileApp"}>
-      <Header {...{setSearch, showSearch, showInfo, setInfo, setParcel, mobile}}>
+      <Header {...{setSearch, showSearch, showInfo, setInfo, setParcel, showSv, setSv, showSatellite, setSatellite, mobile}}>
         {showInfo && <Introduction {...{setInfo, showInfo}}/>}
         {showSearch && <AddressSearch {...{ parcel, setParcel, setCoords, setSearch, showSearch }} />}
       </Header>
       <div id="sidebar">
+      {showSv && (
+        <StreetView {...{ coords, width, height, setSvBearing, setSvCoords }} />
+        )}
         {parcel && <Details {...{ parcel, setCoords, mobile }} />}
+        <SidebarFooter />
       </div>
+      <div className="map-view">
+
       {((mobile && map) || !mobile) && (
-        <Map {...{ parcel, setParcel, width, basemap, coords, svCoords, svBearing }}>{mobile && map && <SVToggle {...{ setMap, map, parcel }} />}</Map>
-      )}
-      {((mobile && !map) || !mobile) && coords && (
-        <StreetView {...{ coords, width, height, setSvBearing, setSvCoords }}>{mobile && !map && <SVToggle {...{ setMap, map, parcel }} />}</StreetView>
-      )}
+        <Map {...{ parcel, setParcel, width, coords, svCoords, svBearing, showSv, showSatellite }} />
+        )}
+
+      </div>
     </div>
   );
 };

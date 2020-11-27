@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 
 import { HeaderButton } from "./HeaderButton";
-import SectionH3 from "./SectionH3";
 
 const IntroPara = ({ children }) => {
   return <p className="py-2 text-sm">{children}</p>;

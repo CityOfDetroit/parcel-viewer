@@ -45,8 +45,8 @@ input {
 /* overall App grids */
 .App {
   grid-template-columns: 45vw 55vw;
-  grid-template-rows   : auto 1fr 1fr;
-  grid-template-areas  : "t m""s m""s v";
+  grid-template-rows   : auto 1fr 50px;
+  grid-template-areas  : "t m""s m""f m";
   width: 90vw;
 }
 
@@ -73,6 +73,7 @@ input {
 
 .App #sidebar {
   grid-area: s;
+  overflow: scroll;
 }
 
 /* Street View */
@@ -82,14 +83,12 @@ input {
 }
 
 .App .street-view {
-  grid-area: v;
-  height   : calc(49vh);
+  height   : calc(35vh);
   font-size: 12px;
 }
 
 .MobileApp .street-view {
-  grid-area: m;
-  height   : calc(42vh);
+  height   : calc(30vh);
   font-size: 1em;
 }
 
@@ -101,7 +100,7 @@ input {
 
 .App #map {
   width : auto;
-  height: calc(49vh);
+  height: 100%;
 }
 
 .MobileApp #map {

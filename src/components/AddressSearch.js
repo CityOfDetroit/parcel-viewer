@@ -1,6 +1,7 @@
 import { faExchangeAlt, faSearch, faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { HeaderButton } from "./HeaderButton";
 
@@ -9,6 +10,7 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
   const [value, setValue] = useState("");
   const [hasFocus, setHasFocus] = useState(false);
   const [searchField, setSearchField] = useState("address");
+  let history = useHistory();
 
   const suggestAddress = (value) => {
     if (value !== "") {
@@ -21,6 +23,7 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
   };
 
   const handleSearch = (value) => {
+    console.log(value)
     suggestAddress(value);
     setValue(value);
     console.log(dataSource)
@@ -49,9 +52,10 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
 
       <div className="flex items-center">
         <input
-          className="bg-white focus:outline-none font-lg p-1 focus:shadow-outline border border-gray-300 rounded-lg block w-full appearance-none leading-normal"
+          className="bg-white mb-2 focus:outline-none font-lg p-1 focus:shadow-outline border border-gray-300 rounded-lg block w-full appearance-none leading-normal"
           onChange={(e) => (searchField === "address" ? handleSearch(e.target.value) : setParcel(null))}
-          onKeyDown={(e) => e.keyCode === 13 && (searchField === "address" ? onSearchSelect(value) : setParcel(e.target.value))}
+          onKeyDown={(e) => e.keyCode === 13 && (searchField === "address" ? onSearchSelect(value) : setParcel(e.target.value)
+          )}
           onFocus={(e) => {
             console.log(e);
             setHasFocus(true);
@@ -71,19 +75,12 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
       </div>
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-
-        <label className={`inline-block text-sm flex items-center`}>
-          Search by {searchField}
-        </label>
-        <HeaderButton
-          icon={faExchangeAlt}
-          onClick={() => {
-            searchField === "address" ? setSearchField("parcel ID") : setSearchField("address");
-          }}
-          className="ml-2"
-          />
-          </div>
-
+        <label className={`inline-block text-sm flex items-center mr-2`}>Search by:</label>
+        <select onChange={(e) => setSearchField(e.target.value)}>
+          <option value="address" className="p-2">address</option>
+          <option value="parcel ID">Parcel ID</option>
+        </select> 
+       </div>
       </div>
     </section>
   );

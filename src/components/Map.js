@@ -3,120 +3,11 @@ import mapboxgl from "mapbox-gl";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import mapStyle from '../style.json'
+import satMapStyle from '../satstyle.json'
 
 import { MapTitle, MapTitleSection } from "./MapHeader";
 
-const addLayers = (map) => {
-
-  // add a new layer for the street-view video camera
-  map.addLayer({
-    id: "mapillary-location",
-    type: "symbol",
-    source: {
-      type: "geojson",
-      data: {
-        type: "FeatureCollection",
-        features: [],
-      },
-    },
-    layout: {
-      "icon-rotate": ["get", "bearing"],
-      "icon-rotation-alignment": "map",
-    },
-  });
-
-  map.loadImage("https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/22/video-camera.png", (error, image) => {
-    if (error) throw error;
-    map.addImage("video", image);
-    map.setLayoutProperty("mapillary-location", "icon-image", "video");
-  });
-
-  map.addLayer({
-    id: "parcels",
-    type: "line",
-    source: "parcels",
-    "source-layer": "parcels",
-    minzoom: 11,
-    layout: {
-      visibility: "visible",
-    },
-    paint: {
-      "line-color": {
-        stops: [
-          [14, "#222"],
-          [17, "#333"],
-          [17.1, "#444"],
-          [18, "#333"],
-        ],
-      },
-      "line-width": {
-        base: 1,
-        stops: [
-          [14, 0.1],
-          [17, 1],
-          [19, 4],
-        ],
-      },
-      "line-opacity": {
-        base: 1,
-        stops: [
-          [14, 0],
-          [14.1, 0.5],
-          [22, 1],
-        ],
-      },
-    },
-  });
-
-  map.addLayer({
-    id: "parcels-highlight",
-    type: "line",
-    source: "parcels",
-    "source-layer": "parcels",
-    minzoom: 15,
-    filter: ["==", "parcelno", ""],
-    layout: {
-      visibility: "visible",
-    },
-    paint: {
-      "line-color": "#feb70d",
-      "line-width": {
-        base: 1,
-        stops: [
-          [14, 2],
-          [15, 3],
-          [22, 10],
-        ],
-      },
-      "line-opacity": {
-        base: 1,
-        stops: [
-          [14, 0],
-          [14.1, 0.1],
-          [14.5, 1],
-          [22, 1],
-        ],
-      },
-    },
-  });
-
-  map.addLayer({
-    id: "parcels-fill",
-    type: "fill",
-    source: "parcels",
-    "source-layer": "parcels",
-    interactive: true,
-    minzoom: 12,
-    layout: {
-      visibility: "visible",
-    },
-    paint: {
-      "fill-color": "rgba(0,0,0,0)",
-    },
-  });
-};
-
-const Map = ({ parcel, setParcel, coords, width, height, children, svCoords, svBearing }) => {
+const Map = ({ parcel, setParcel, coords, width, height, children, svCoords, svBearing, showSv, showSatellite }) => {
   const [theMap, setTheMap] = useState(null);
   let history = useHistory();
 
@@ -131,16 +22,13 @@ const Map = ({ parcel, setParcel, coords, width, height, children, svCoords, svB
       container: "map", // container id
       style: mapStyle, // stylesheet location
       center: coords ? [coords.y, coords.x] : [xRandomCenter, yRandomCenter], // starting position [lng, lat]
-      zoom: 14.5, // starting zoom
+      zoom: 16.25, // starting zoom
     });
 
     map.resize();
 
     map.on("load", () => {
       setTheMap(map);
-
-      addLayers(map);
-
       map.on("click", "parcels-fill", function (e) {
         let parcel = map.queryRenderedFeatures(e.point, {
           layers: ["parcels-fill"],
@@ -151,7 +39,25 @@ const Map = ({ parcel, setParcel, coords, width, height, children, svCoords, svB
         // setCoords(e.lngLat);
       });
     });
+
+    map.on('style.load', () => {
+      map.setFilter("parcels-highlight", ["==", "parcelno", parcel ? parcel : ""]);
+      map.loadImage("https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/22/video-camera.png", (error, image) => {
+        if (error) throw error;
+        map.addImage("video", image);
+        map.setLayoutProperty("mapillary-location", "icon-image", "video");
+      });    
+    })
   }, []);
+
+  useEffect(() => {
+    if(theMap && showSatellite) {
+      theMap.setStyle(satMapStyle)
+    }
+    if(theMap && !showSatellite) {
+      theMap.setStyle(mapStyle)
+    };
+  }, [showSatellite])
 
   //Highlight active parcel
   useEffect(() => {
@@ -167,10 +73,20 @@ const Map = ({ parcel, setParcel, coords, width, height, children, svCoords, svB
     theMap && theMap.resize();
   }, [width, height]);
 
+
+  useEffect(() => {
+    if(theMap && showSv) {
+      theMap.setLayoutProperty("mapillary-location", "visibility", "visible")
+    }
+    if(theMap && !showSv) {
+      theMap.setLayoutProperty("mapillary-location", "visibility", "none")
+    }
+  }, [showSv])
+
   useEffect(() => {
     console.log(svCoords, svBearing);
-    theMap &&
-      theMap.getSource("mapillary-location").setData({
+    theMap && showSv &&
+      theMap.getSource("mapillary").setData({
         type: "FeatureCollection",
         // we'll make the map data here
         features: [
@@ -186,6 +102,11 @@ const Map = ({ parcel, setParcel, coords, width, height, children, svCoords, svB
           },
         ],
       });
+    if(theMap && !showSv){
+      theMap.getSource("mapillary").setData({
+        type: "FeatureCollection", features: []
+      })
+    }
   }, [svCoords, svBearing]);
 
   return (

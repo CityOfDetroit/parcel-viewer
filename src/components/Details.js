@@ -50,11 +50,10 @@ const Details = ({ parcel, setCoords, mobile, children }) => {
   }, [parcel]);
 
   return (
-    <section className={`details m-1`}>
+    <section className={`m-1`}>
       {parcelData ? (
         <>
-          <div>
-            <table className="bg-det-gray mb-1">
+            <table className="bg-det-gray mb-1" style={{ position: 'sticky', top: 0}}>
               <thead>
                 <tr className="">
                   <td>Parcel ID: {parcelData.attributes.parcel_number}</td>
@@ -64,7 +63,6 @@ const Details = ({ parcel, setCoords, mobile, children }) => {
                 </tr>
               </thead>
             </table>
-          </div>
           <DetailsTable parcelData={parcelData.attributes} mobile={mobile} />
         </>
       ) : (
