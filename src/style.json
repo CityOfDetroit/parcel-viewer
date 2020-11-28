@@ -16986,7 +16986,8 @@
         "source": "mapillary",
         "layout": {
           "icon-rotate": ["get", "bearing"],
-          "icon-rotation-alignment": "map" 
+          "icon-rotation-alignment": "map",
+          "icon-image": "video"
         }
       },
       {

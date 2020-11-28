@@ -31,7 +31,10 @@
         "type": "raster",
         "source": "satellite",
         "minzoom": 0,
-        "maxzoom": 22
+        "maxzoom": 22,
+        "paint": {
+          "raster-opacity": 0.9
+        }
       },
       {
         "id": "Tree/Elm",
@@ -2704,15 +2707,15 @@
             "stops": [
               [
                 10,
-                9.5
-              ],
-              [
-                14,
                 10.5
               ],
               [
-                18,
+                14,
                 11.5
+              ],
+              [
+                18,
+                12.5
               ]
             ]
           },
@@ -2737,8 +2740,8 @@
           }
         },
         "paint": {
-          "text-color": "#595959",
-          "text-halo-color": "#FFFFFF",
+          "text-color": "#FFFFFF",
+          "text-halo-color": "#595959",
           "text-halo-width": 1
         }
       },
@@ -2805,8 +2808,8 @@
           }
         },
         "paint": {
-          "text-color": "#595959",
-          "text-halo-color": "#FFFFFF",
+          "text-color": "#FFFFFF",
+          "text-halo-color": "#595959",
           "text-halo-width": 1
         }
       },
@@ -2840,15 +2843,15 @@
             "stops": [
               [
                 10,
-                9.5
-              ],
-              [
-                14,
                 10.5
               ],
               [
-                18,
+                14,
                 12.5
+              ],
+              [
+                18,
+                13.5
               ]
             ]
           },
@@ -2873,8 +2876,8 @@
           }
         },
         "paint": {
-          "text-color": "#4E4E4E",
-          "text-halo-color": "#FFFFFF",
+          "text-color": "#FFFFFF",
+          "text-halo-color": "#4e4e4e",
           "text-halo-width": 1
         }
       },
@@ -2908,15 +2911,15 @@
             "stops": [
               [
                 10,
-                9.5
-              ],
-              [
-                14,
                 10.5
               ],
               [
+                14,
+                11.5
+              ],
+              [
                 18,
-                12.5
+                14.5
               ]
             ]
           },
@@ -2941,8 +2944,8 @@
           }
         },
         "paint": {
-          "text-color": "#4E4E4E",
-          "text-halo-color": "#FFFFFF",
+          "text-color": "#FFFFFF",
+          "text-halo-color": "#4e4e4e",
           "text-halo-width": 1
         }
       },
@@ -10524,7 +10527,8 @@
         "source": "mapillary",
         "layout": {
           "icon-rotate": ["get", "bearing"],
-          "icon-rotation-alignment": "map" 
+          "icon-rotation-alignment": "map",
+          "icon-image": "video"
         }
       },
       {
