@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import mapStyle from '../style.json'
 import satMapStyle from '../satstyle.json'
+import videoIcon from '../img/video.png'
 
 import { MapTitle, MapTitleSection } from "./MapHeader";
 
@@ -20,7 +21,7 @@ const Map = ({ parcel, setParcel, coords, width, height, children, svCoords, svB
   useEffect(() => {
     var map = new mapboxgl.Map({
       container: "map", // container id
-      style: mapStyle, // stylesheet location
+      style: showSatellite ? satMapStyle : mapStyle, // stylesheet location
       center: coords ? [coords.y, coords.x] : [xRandomCenter, yRandomCenter], // starting position [lng, lat]
       zoom: 16.25, // starting zoom
     });
@@ -38,14 +39,31 @@ const Map = ({ parcel, setParcel, coords, width, height, children, svCoords, svB
         history.push(`/${parcel[0].properties.parcelno}/`);
         // setCoords(e.lngLat);
       });
+
+
     });
 
     map.on('style.load', () => {
-      map.setFilter("parcels-highlight", ["==", "parcelno", parcel ? parcel : ""]);
-      map.loadImage("https://raw.githubusercontent.com/encharm/Font-Awesome-SVG-PNG/master/black/png/22/video-camera.png", (error, image) => {
+      map.loadImage(videoIcon, (error, image) => {
         if (error) throw error;
         map.addImage("video", image);
-        map.setLayoutProperty("mapillary-location", "icon-image", "video");
+        map.setFilter("parcels-highlight", ["==", "parcelno", parcel ? parcel : ""]);
+        svCoords && map.getSource("mapillary").setData({
+          type: "FeatureCollection",
+          // we'll make the map data here
+          features: [
+            {
+              type: "Feature",
+              geometry: {
+                type: "Point",
+                coordinates: [svCoords.lon, svCoords.lat],
+              },
+              properties: {
+                bearing: svBearing - 90,
+              },
+            },
+          ],
+        });
       });    
     })
   }, []);

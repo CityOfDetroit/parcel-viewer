@@ -40,7 +40,7 @@ const ParcelExplorer = () => {
   const [svBearing, setSvBearing] = useState(null);
   const [showInfo, setInfo] = useState(mobile ? false : true)
   const [showSearch, setSearch] = useState(mobile ? false : true)
-  const [showSatellite, setSatellite] = useState(false)
+  const [showSatellite, setSatellite] = useState(true)
 
   // Roll our own media-query hook:
   useEffect(() => {
