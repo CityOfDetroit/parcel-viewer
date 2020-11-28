@@ -53,7 +53,7 @@ input {
 .MobileApp {
   grid-template-columns: 1fr;
   grid-template-rows   : auto 43vh 1fr;
-  grid-template-areas  : "t""m""s";
+  grid-template-areas  : "t""m""s""f";
 }
 
 /* header treatment */
