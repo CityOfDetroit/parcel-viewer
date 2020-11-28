@@ -61,9 +61,8 @@ function setBearing(node, mly, start, end) {
 
   // compute this with @turf/bearing
   var desiredBearing = bearing(start, end); // Your desired bearing.
-
   var basicX = bearingToBasic(desiredBearing, nodeBearing);
-  var basicY = 0.6; // tilt slight down
+  var basicY = 0.45; // tilt slightly up
 
   var center = [basicX, basicY];
 
@@ -118,12 +117,10 @@ const StreetView = ({ coords, width, height, setSvBearing, setSvCoords, children
     setMapillary(mapillaryView);
 
     mapillaryView.on("nodechanged", (n) => {
-      console.log(n.latLon);
       setSvCoords(n.latLon);
     });
 
     mapillaryView.on("bearingchanged", (b) => {
-      console.log(b);
       setSvBearing(b);
     });
 
@@ -151,7 +148,7 @@ const StreetView = ({ coords, width, height, setSvBearing, setSvCoords, children
         setBearing(node, mapillary, currentKey.geometry.coordinates, [coords.lng || coords.x, coords.lat || coords.y]);
         setLoading(false);
       });
-  }, [currentKey]);
+  }, [currentKey, mapillary]);
 
   useEffect(() => {
     if (mapillary) {
