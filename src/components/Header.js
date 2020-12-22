@@ -6,8 +6,8 @@ import { faGlobe, faInfoCircle, faSearch, faStreetView } from "@fortawesome/free
 
 const Header = ({ showSearch, setSearch, showInfo, setInfo, showSv, setSv, showSatellite, setSatellite, mobile, children }) => {
   return (
-    <header className="mx-1 mb-1">
-      <div className="flex items-center">
+    <header>
+      <div className="flex items-center mx-1 mb-1">
         <img src={logo} className="h-12" />
         <h1 className="text-xl w-full ml-2">Parcel Viewer</h1>
       </div>

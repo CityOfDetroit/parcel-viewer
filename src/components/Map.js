@@ -1,5 +1,6 @@
 import { faExchangeAlt, faMapMarked } from "@fortawesome/free-solid-svg-icons";
 import mapboxgl from "mapbox-gl";
+import 'mapbox-gl/dist/mapbox-gl.css';
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import mapStyle from '../style.json'
@@ -26,6 +27,22 @@ const Map = ({ parcel, setParcel, coords, width, height, children, svCoords, svB
       zoom: 16.25, // starting zoom
     });
 
+    map.addControl(
+      new mapboxgl.NavigationControl({
+        showCompass: false
+      }),
+      "bottom-left"
+    );
+
+    // Add geolocate control to the map.
+map.addControl(
+  new mapboxgl.GeolocateControl({
+  positionOptions: {
+  enableHighAccuracy: true
+  },
+  trackUserLocation: true
+  }), 'bottom-left'
+  );
     map.resize();
 
     map.on("load", () => {
