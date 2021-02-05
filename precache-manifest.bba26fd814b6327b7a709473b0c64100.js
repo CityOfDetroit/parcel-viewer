@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3ace8e5195e9d018faa7c1b120065bcb",
+    "revision": "15f46e47273ec336a064b3f2949b1d09",
     "url": "/parcel-viewer/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/parcel-viewer/static/css/2.0a5b19c0.chunk.css"
   },
   {
-    "revision": "0af7f3d0b1eb53fcf88a",
+    "revision": "31e4dc634b9dc0ab5ff0",
     "url": "/parcel-viewer/static/css/main.7e67ec31.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/parcel-viewer/static/js/2.e1ff9b7e.chunk.js"
   },
   {
-    "revision": "0af7f3d0b1eb53fcf88a",
-    "url": "/parcel-viewer/static/js/main.51aaf9a0.chunk.js"
+    "revision": "31e4dc634b9dc0ab5ff0",
+    "url": "/parcel-viewer/static/js/main.f8d69179.chunk.js"
   },
   {
     "revision": "0b9553921c47b356dbf4",
