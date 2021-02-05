@@ -11,6 +11,10 @@
         "type": "vector",
         "tiles": ["https://tiles.arcgis.com/tiles/qvkbeam7Wirps6zC/arcgis/rest/services/parcels/VectorTileServer/tile/{z}/{y}/{x}.pbf"]
       },
+      "zoning": {
+        "type": "vector",
+        "tiles": ["https://tiles.arcgis.com/tiles/qvkbeam7Wirps6zC/arcgis/rest/services/parcels/Zoning_Vector_Tiles/tile/{z}/{y}/{x}.pbf"]
+      },
       "mapillary": {
         "type": "geojson",
         "data": {
