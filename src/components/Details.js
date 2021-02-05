@@ -20,7 +20,7 @@ const Details = ({ parcel, setCoords, mobile, children }) => {
     };
 
     // service URL for parcel layer
-    let url = `https://gis.detroitmi.gov/arcgis/rest/services/OpenData/Parcels/FeatureServer/0/query?`;
+    let url = `https://opengis.detroitmi.gov/opengis/rest/services/Assessors/Parcels/FeatureServer/0/query?`;
 
     // loop through params keys, make URI encoded string, join with &s
     let queryString = Object.keys(params)
