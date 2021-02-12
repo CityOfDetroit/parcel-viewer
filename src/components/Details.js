@@ -36,16 +36,23 @@ const Details = ({ parcel, setCoords, mobile, children }) => {
       .then((response) => response.json())
       .then((d) => {
         console.log(d);
-        let geojson = parse(d.features[0].geometry);
-        let coordinates = centroid(geojson).geometry.coordinates;
-        let coords = {
-          y: coordinates[1],
-          x: coordinates[0],
-        };
-        setCoords(coords);
-        console.log("Selected parcel: ", d.features[0]);
-        setParcelData(d.features[0]);
-        setLoadScreen(false);
+        if(d.features.length > 0) {
+          let geojson = parse(d.features[0].geometry);
+          let coordinates = centroid(geojson).geometry.coordinates;
+          let coords = {
+            y: coordinates[1],
+            x: coordinates[0],
+          };
+          setCoords(coords);
+          console.log("Selected parcel: ", d.features[0]);
+          setParcelData(d.features[0]);
+          setLoadScreen(false);
+        }
+        else {
+          console.log('Parcel not found')
+          setParcelData(null)
+          setLoadScreen(false)
+        }
       });
   }, [parcel]);
 
@@ -66,7 +73,12 @@ const Details = ({ parcel, setCoords, mobile, children }) => {
           <DetailsTable parcelData={parcelData.attributes} mobile={mobile} />
         </>
       ) : (
-        <>{children}</>
+        <>
+        <div className="p-2 text-lg">
+          We couldn't find information for this parcel: {parcel}
+        </div>
+        {children}
+        </>
       )}
     </section>
   );

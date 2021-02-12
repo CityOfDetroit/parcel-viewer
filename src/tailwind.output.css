@@ -863,6 +863,10 @@ video {
   padding-left: 0.25rem;
 }
 
+.static{
+  position: static;
+}
+
 .absolute{
   position: absolute;
 }
