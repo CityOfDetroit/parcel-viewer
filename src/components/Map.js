@@ -48,12 +48,24 @@ map.addControl(
     map.on("load", () => {
       setTheMap(map);
       map.on("click", "parcels-fill", function (e) {
-        let parcel = map.queryRenderedFeatures(e.point, {
+        let results = map.queryRenderedFeatures(e.point, {
           layers: ["parcels-fill"],
         });
-        console.log(parcel)
-        setParcel(parcel[0].properties.parcelno);
-        history.push(`/${parcel[0].properties.parcelno}/`);
+        console.log(results)
+
+        // Subsequent clicks on the same shape cycle between overlapping parcels.
+        setParcel((currentParcel) => {
+          const parcels = results.map((p) => p.properties.parcelno)
+          const currentIndex = parcels.findIndex((candidateParcel) =>
+            candidateParcel === currentParcel
+          );
+          const nextIndex = (currentIndex + 1) % results.length;
+          const nextParcel = parcels[nextIndex];
+
+          history.push(`/${nextParcel}/`);
+          return nextParcel;
+        });
+
         // setCoords(e.lngLat);
       });
 
