@@ -7,6 +7,7 @@ import SectionH3 from "./SectionH3";
 
 const Details = ({ parcel, setCoords, mobile, children }) => {
   let [parcelData, setParcelData] = useState(null);
+  let [parcelApiData, setParcelApiData] = useState(null);
   const [loadScreen, setLoadScreen] = useState(false);
 
   // function to fetch data; returns a fetch Promise
@@ -30,35 +31,46 @@ const Details = ({ parcel, setCoords, mobile, children }) => {
     return fetch(url + queryString);
   };
 
+  const fetchApiData = (parcel) => {
+    return fetch(`https://apis.detroitmi.gov/assessments/parcel/${parcel}/`)
+  }
+
   useEffect(() => {
     setLoadScreen(true);
     fetchData(parcel)
       .then((response) => response.json())
       .then((d) => {
-        console.log(d);
-        if(d.features.length > 0) {
-          let geojson = parse(d.features[0].geometry);
-          let coordinates = centroid(geojson).geometry.coordinates;
-          let coords = {
-            y: coordinates[1],
-            x: coordinates[0],
-          };
-          setCoords(coords);
-          console.log("Selected parcel: ", d.features[0]);
-          setParcelData(d.features[0]);
-          setLoadScreen(false);
-        }
-        else {
-          console.log('Parcel not found')
-          setParcelData(null)
-          setLoadScreen(false)
-        }
+        fetchApiData(parcel)
+          .then(resp => resp.json())
+          .then(data => {
+            console.log(d, data);
+            if(d.features.length > 0) {
+              let geojson = parse(d.features[0].geometry);
+              let coordinates = centroid(geojson).geometry.coordinates;
+              let coords = {
+                y: coordinates[1],
+                x: coordinates[0],
+              };
+              setCoords(coords);
+              console.log("Selected parcel: ", d.features[0]);
+              setParcelData(d.features[0]);
+              setParcelApiData(data)
+              setLoadScreen(false);
+            }
+            else {
+              console.log('Parcel not found')
+              setParcelData(null)
+              setParcelApiData(null)
+              setLoadScreen(false)
+            }
+          })
+
       });
   }, [parcel]);
 
   return (
     <section className={`m-1`}>
-      {parcelData ? (
+      {parcelData && parcelApiData ? (
         <>
             <table className="bg-det-gray mb-1" style={{ position: 'sticky', top: 0}}>
               <thead>
@@ -70,7 +82,7 @@ const Details = ({ parcel, setCoords, mobile, children }) => {
                 </tr>
               </thead>
             </table>
-          <DetailsTable parcelData={parcelData.attributes} mobile={mobile} />
+          <DetailsTable parcelData={parcelData.attributes} parcelApiData={parcelApiData} mobile={mobile} />
         </>
       ) : (
         <>

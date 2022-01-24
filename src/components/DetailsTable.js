@@ -3,8 +3,9 @@ import React from "react";
 
 import SectionH3 from "./SectionH3";
 
-function DetailsTable({ parcelData, mobile }) {
+function DetailsTable({ parcelData, parcelApiData, mobile }) {
   let d = parcelData;
+  let e = parcelApiData;
 
   return (
     <section className="w-full overflow-y-auto px-1 details-table">
@@ -140,7 +141,7 @@ function DetailsTable({ parcelData, mobile }) {
       </section>
       <section className="details-section">
         <SectionH3>Legal description</SectionH3>
-        <p className="mt-2 max-w-8 bg-det-gray px-4 py-2 font-mono text-sm leading-4">{d.legal_description}</p>
+        <p className="mt-2 max-w-8 bg-det-gray px-4 py-2 font-mono text-sm leading-4">{e.legaldescription}</p>
       </section>
     </section>
   );

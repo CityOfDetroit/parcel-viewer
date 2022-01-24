@@ -9,7 +9,7 @@
       },
       "parcels": {
         "type": "vector",
-        "tiles": ["https://tiles.arcgis.com/tiles/qvkbeam7Wirps6zC/arcgis/rest/services/BaseUnitVectorTiles/VectorTileServer/tile/{z}/{y}/{x}.pbf"]
+        "tiles": ["https://tiles.arcgis.com/tiles/qvkbeam7Wirps6zC/arcgis/rest/services/ParcelMigration/VectorTileServer/tile/{z}/{y}/{x}.pbf"]
       },
       "mapillary": {
         "type": "geojson",
@@ -16993,7 +16993,7 @@
       {
         "id": "parcels",
         "type": "line",
-        "source": "parcels",
+        "source": "parcels_2021",
         "source-layer": "parcels",
         "minzoom": 11,
         "layout": {
@@ -17031,7 +17031,7 @@
         "id": "parcels-highlight",
         "type": "line",
         "source": "parcels",
-        "source-layer": "parcels",
+        "source-layer": "parcels_2021",
         "minzoom": 11,
         "filter": ["==", "parcelno", ""],
         "layout": {
@@ -17063,7 +17063,7 @@
         "id": "parcels-fill",
         "type": "fill",
         "source": "parcels",
-        "source-layer": "parcels",
+        "source-layer": "parcels_2021",
         "interactive": true,
         "minzoom": 12,
         "layout": {
