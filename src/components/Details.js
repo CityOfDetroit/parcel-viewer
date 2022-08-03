@@ -21,7 +21,7 @@ const Details = ({ parcel, setCoords, mobile, children }) => {
     };
 
     // service URL for parcel layer
-    let url = `https://services2.arcgis.com/qvkbeam7Wirps6zC/arcgis/rest/services/Parcels_2021/FeatureServer/0/query?`;
+    let url = `https://services2.arcgis.com/qvkbeam7Wirps6zC/arcgis/rest/services/Parcels_Current/FeatureServer/0/query?`;
 
     // loop through params keys, make URI encoded string, join with &s
     let queryString = Object.keys(params)

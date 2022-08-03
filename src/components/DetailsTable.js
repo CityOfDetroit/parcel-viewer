@@ -15,38 +15,38 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
           <tbody>
             <tr>
               <td>Taxpayer</td>
-              <td>{d.taxpayer_1}</td>
+              <td>{e.taxpayer1}</td>
             </tr>
-            {d.taxpayer_2 && (
+            {e.taxpayer2 && (
               <tr>
                 <td>Taxpayer (extended)</td>
-                <td>{d.taxpayer_2}</td>
+                <td>{e.taxpayer2}</td>
               </tr>
             )}
             <tr>
               <td>Taxpayer Address</td>
-              <td>{`${d.taxpayer_street}, ${d.taxpayer_city}, ${d.taxpayer_state}`}</td>
+              <td>{`${e.taxpaddr}, ${e.taxpcity}, ${e.taxpstate}`}</td>
             </tr>
-            {d.sale_date && (
+            {e.saledate && (
               <tr>
                 <td>Last Sale Date</td>
-                <td>{moment(d.sale_date).format("LL")}</td>
+                <td>{moment(e.saledate).format("LL")}</td>
               </tr>
             )}
-            {d.sale_date && (
+            {e.saledate && (
               <tr>
                 <td>Last Sale Price</td>
-                <td>{`$${parseInt(d.sale_price).toLocaleString()}`}</td>
+                <td>{`$${parseInt(e.saleprice).toLocaleString()}`}</td>
               </tr>
             )}
             <tr>
               <td>PRE %</td>
-              <td>{d.homestead_pre}</td>
+              <td>{e.pre}</td>
             </tr>
-            {d.nez && (
+            {e.nez !== "" && (
               <tr>
                 <td>NEZ</td>
-                <td>{d.nez}</td>
+                <td>{e.nez}</td>
               </tr>
             )}
           </tbody>
@@ -67,33 +67,33 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
             <tr>
               <td>Property Class</td>
               <td>
-                {d.property_class} - {d.property_class_desc}
+                {e.propclass} - {e.propclassdesc}
               </td>
             </tr>
             <tr>
               <td>Property Use</td>
               <td>
-                {d.use_code} - {d.use_code_desc}
+                {e.usecode} - {d.use_code_desc}
               </td>
             </tr>
             <tr>
               <td>Zoning</td>
-              <td>{d.zoning}</td>
+              <td>{e.zoning}</td>
             </tr>
             <tr>
               <td># of Buildings</td>
-              <td>{d.num_bldgs}</td>
+              <td>{e.resbldgcount + e.cibldgcount}</td>
             </tr>
-            {d.total_floor_area && (
+            {e.totalfloor && (
               <tr>
                 <td>Total Floor Area (sf)</td>
-                <td>{d.total_floor_area}</td>
+                <td>{e.totalfloor}</td>
               </tr>
             )}
-            {d.style && (
+            {e.style && (
               <tr>
                 <td>Style</td>
-                <td>{d.style}</td>
+                <td>{e.style}</td>
               </tr>
             )}
           </tbody>
@@ -105,15 +105,15 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
           <tbody>
             <tr>
               <td>Tax Status</td>
-              <td>{d.tax_status}</td>
+              <td>{e.taxstatus}</td>
             </tr>
             <tr>
               <td>Assessed Value</td>
-              <td>{`$${parseInt(d.assessed_value).toLocaleString()}`}</td>
+              <td>{`$${parseInt(e.assessedvalue).toLocaleString()}`}</td>
             </tr>
             <tr>
               <td>Taxable Value</td>
-              <td>{`$${parseInt(d.taxable_value).toLocaleString()}`}</td>
+              <td>{`$${parseInt(e.assessedvalue).toLocaleString()}`}</td>
             </tr>
           </tbody>
         </table>
@@ -124,16 +124,16 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
           <tbody>
             <tr>
               <td>Total Acreage</td>
-              <td>{d.total_acreage} ac</td>
+              <td>{e.totalacreage} ac</td>
             </tr>
             <tr>
               <td>Total Square Footage</td>
-              <td>{d.total_square_footage} sf</td>
+              <td>{e.totalsqft} sf</td>
             </tr>
             <tr>
               <td>Depth x Frontage (ft)</td>
               <td>
-                {d.depth} x {d.frontage}
+                {e.depth} x {e.frontage}
               </td>
             </tr>
           </tbody>
