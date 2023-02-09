@@ -55,7 +55,7 @@ map.addControl(
 
         // Subsequent clicks on the same shape cycle between overlapping parcels.
         setParcel((currentParcel) => {
-          const parcels = results.map((p) => p.properties.parcelno)
+          const parcels = results.map((p) => p.properties.parcel_id)
           const currentIndex = parcels.findIndex((candidateParcel) =>
             candidateParcel === currentParcel
           );
@@ -76,7 +76,7 @@ map.addControl(
       map.loadImage(videoIcon, (error, image) => {
         if (error) throw error;
         map.addImage("video", image);
-        map.setFilter("parcels-highlight", ["==", "parcelno", parcel ? parcel : ""]);
+        map.setFilter("parcels-highlight", ["==", "parcel_id", parcel ? parcel : ""]);
         svCoords && map.getSource("mapillary").setData({
           type: "FeatureCollection",
           // we'll make the map data here
@@ -108,7 +108,7 @@ map.addControl(
 
   //Highlight active parcel
   useEffect(() => {
-    theMap && theMap.setFilter("parcels-highlight", ["==", "parcelno", parcel ? parcel : ""]);
+    theMap && theMap.setFilter("parcels-highlight", ["==", "parcel_id", parcel ? parcel : ""]);
   }, [parcel, theMap]);
 
   //Highlight active parcel
