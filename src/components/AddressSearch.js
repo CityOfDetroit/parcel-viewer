@@ -12,9 +12,11 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
   const [searchField, setSearchField] = useState("address");
   let history = useHistory();
 
+  const GEOCODER = `https://opengis.detroitmi.gov/arcgis/rest/services/BaseUnits/BaseUnitGeocoder/GeocodeServer`
+
   const suggestAddress = (value) => {
     if (value !== "") {
-      fetch(`https://gis.detroitmi.gov/arcgis/rest/services/DoIT/AddressPointGeocoder/GeocodeServer/suggest?text=${value}&f=pjson`)
+      fetch(`${GEOCODER}/suggest?text=${value}&f=pjson`)
         .then((r) => r.json())
         .then((d) => {
           d.suggestions.length < 1 ? setDataSource({ text: value }) : setDataSource(d.suggestions.map((s) => s.text));
@@ -23,21 +25,20 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
   };
 
   const handleSearch = (value) => {
-    console.log(value)
     suggestAddress(value);
     setValue(value);
     console.log(dataSource)
   };
 
   const onSearchSelect = (value) => {
-    const url = `https://gis.detroitmi.gov/arcgis/rest/services/DoIT/CompositeGeocoder/GeocodeServer/findAddressCandidates?SingleLine=${value}&outSR=4326&outFields=*&f=pjson`;
+    const url = `${GEOCODER}/findAddressCandidates?SingleLine=${value}&outSR=4326&outFields=*&f=pjson`;
     fetch(url)
       .then((r) => r.json())
       .then((d) => {
         if (d.candidates.length > 0) {
           let { attributes, location } = d.candidates[0];
-          if (attributes["User_fld"]) {
-            setParcel(attributes["User_fld"]);
+          if (attributes["parcel_id"]) {
+            setParcel(attributes["parcel_id"]);
           } else {
             console.log("not found!");
             setParcel(null);
