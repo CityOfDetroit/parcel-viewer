@@ -12,7 +12,7 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
   const [searchField, setSearchField] = useState("address");
   let history = useHistory();
 
-  const GEOCODER = `https://opengis.detroitmi.gov/arcgis/rest/services/BaseUnits/BaseUnitGeocoder/GeocodeServer`
+  const GEOCODER = `https://opengis.detroitmi.gov/opengis/rest/services/BaseUnits/BaseUnitGeocoder/GeocodeServer`
 
   const suggestAddress = (value) => {
     if (value !== "") {
