@@ -5,8 +5,8 @@ import SectionH3 from "./SectionH3";
 
 function DetailsTable({ parcelData, parcelApiData, mobile }) {
   let d = parcelData;
-  let e = parcelApiData;
 
+  console.log(d)
   return (
     <section className="w-full overflow-y-auto px-1 details-table">
       <section className="details-section">
@@ -15,38 +15,38 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
           <tbody>
             <tr>
               <td>Taxpayer</td>
-              <td>{e.taxpayer1}</td>
+              <td>{d.taxpayer_1}</td>
             </tr>
-            {e.taxpayer2 && (
+            {d.taxpayer2 && (
               <tr>
                 <td>Taxpayer (extended)</td>
-                <td>{e.taxpayer2}</td>
+                <td>{d.taxpayer_2}</td>
               </tr>
             )}
             <tr>
               <td>Taxpayer Address</td>
-              <td>{`${e.taxpaddr}, ${e.taxpcity}, ${e.taxpstate}`}</td>
+              <td>{`${d.taxpayer_street}, ${d.taxpayer_city}, ${d.taxpayer_state}, ${d.taxpayer_zip}`}</td>
             </tr>
-            {e.saledate && (
+            {d.saledate && (
               <tr>
                 <td>Last Sale Date</td>
-                <td>{moment(e.saledate).format("LL")}</td>
+                <td>{moment(d.sale_date).format("LL")}</td>
               </tr>
             )}
-            {e.saledate && (
+            {d.saledate && (
               <tr>
                 <td>Last Sale Price</td>
-                <td>{`$${parseInt(e.saleprice).toLocaleString()}`}</td>
+                <td>{`$${parseInt(d.sale_price).toLocaleString()}`}</td>
               </tr>
             )}
             <tr>
               <td>PRE %</td>
-              <td>{e.pre}</td>
+              <td>{d.homestead_pre}</td>
             </tr>
-            {e.nez !== "" && (
+            {d.nez !== "" && (
               <tr>
                 <td>NEZ</td>
-                <td>{e.nez}</td>
+                <td>{d.nez}</td>
               </tr>
             )}
           </tbody>
@@ -67,33 +67,33 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
             <tr>
               <td>Property Class</td>
               <td>
-                {e.propclass} - {e.propclassdesc}
+                {d.property_class} - {d.property_class_desc}
               </td>
             </tr>
             <tr>
               <td>Property Use</td>
               <td>
-                {e.usecode} - {d.use_code_desc}
+                {d.use_code} - {d.use_code_desc}
               </td>
             </tr>
             <tr>
               <td>Zoning</td>
-              <td>{e.zoning}</td>
+              <td>{d.zoning}</td>
             </tr>
             <tr>
               <td># of Buildings</td>
-              <td>{e.resbldgcount + e.cibldgcount}</td>
+              <td>{d.num_bldgs}</td>
             </tr>
-            {e.totalfloor && (
+            {d.totalfloor && (
               <tr>
                 <td>Total Floor Area (sf)</td>
-                <td>{e.totalfloor}</td>
+                <td>{d.total_floor_area}</td>
               </tr>
             )}
-            {e.style && (
+            {d.style && (
               <tr>
                 <td>Style</td>
-                <td>{e.style}</td>
+                <td>{d.style}</td>
               </tr>
             )}
           </tbody>
@@ -105,15 +105,15 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
           <tbody>
             <tr>
               <td>Tax Status</td>
-              <td>{e.taxstatus}</td>
+              <td>{d.tax_status}</td>
             </tr>
             <tr>
               <td>Assessed Value</td>
-              <td>{`$${parseInt(e.assessedvalue).toLocaleString()}`}</td>
+              <td>{`$${parseInt(d.assessed_value).toLocaleString()}`}</td>
             </tr>
             <tr>
               <td>Taxable Value</td>
-              <td>{`$${parseInt(e.assessedvalue).toLocaleString()}`}</td>
+              <td>{`$${parseInt(d.assessed_value).toLocaleString()}`}</td>
             </tr>
           </tbody>
         </table>
@@ -124,16 +124,16 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
           <tbody>
             <tr>
               <td>Total Acreage</td>
-              <td>{e.totalacreage} ac</td>
+              <td>{d.total_acreage} ac</td>
             </tr>
             <tr>
               <td>Total Square Footage</td>
-              <td>{e.totalsqft} sf</td>
+              <td>{d.total_square_footage} sf</td>
             </tr>
             <tr>
               <td>Depth x Frontage (ft)</td>
               <td>
-                {e.depth} x {e.frontage}
+                {d.depth} x {d.frontage}
               </td>
             </tr>
           </tbody>
@@ -141,7 +141,7 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
       </section>
       <section className="details-section">
         <SectionH3>Legal description</SectionH3>
-        <p className="mt-2 max-w-8 bg-det-gray px-4 py-2 font-mono text-sm leading-4">{e.legaldescription}</p>
+        <p className="mt-2 max-w-8 bg-det-gray px-4 py-2 font-mono text-sm leading-4">{d.legal_description}</p>
       </section>
     </section>
   );
