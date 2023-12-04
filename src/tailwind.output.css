@@ -632,10 +632,28 @@ video {
   background-color: rgba(255, 255, 255, var(--bg-opacity));
 }
 
+.bg-gray-800{
+  --bg-opacity: 1;
+  background-color: #2d3748;
+  background-color: rgba(45, 55, 72, var(--bg-opacity));
+}
+
+.bg-red-400{
+  --bg-opacity: 1;
+  background-color: #fc8181;
+  background-color: rgba(252, 129, 129, var(--bg-opacity));
+}
+
 .hover\:bg-gray-400:hover{
   --bg-opacity: 1;
   background-color: #cbd5e0;
   background-color: rgba(203, 213, 224, var(--bg-opacity));
+}
+
+.hover\:bg-gray-600:hover{
+  --bg-opacity: 1;
+  background-color: #718096;
+  background-color: rgba(113, 128, 150, var(--bg-opacity));
 }
 
 .focus\:bg-white:focus{
@@ -702,6 +720,10 @@ video {
   display: table;
 }
 
+.flex-col{
+  flex-direction: column;
+}
+
 .items-center{
   align-items: center;
 }
@@ -718,12 +740,20 @@ video {
   font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.font-thin{
+  font-weight: 200;
+}
+
 .font-light{
   font-weight: 300;
 }
 
 .font-normal{
   font-weight: 400;
+}
+
+.font-semibold{
+  font-weight: 600;
 }
 
 .h-12{
@@ -774,6 +804,10 @@ video {
   margin: 0.25rem;
 }
 
+.m-2{
+  margin: 0.5rem;
+}
+
 .mx-1{
   margin-left: 0.25rem;
   margin-right: 0.25rem;
@@ -810,6 +844,14 @@ video {
 
 .mr-3{
   margin-right: 0.75rem;
+}
+
+.mt-4{
+  margin-top: 1rem;
+}
+
+.mb-4{
+  margin-bottom: 1rem;
 }
 
 .focus\:outline-none:focus{
@@ -854,6 +896,11 @@ video {
   padding-right: 0.75rem;
 }
 
+.py-4{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
 .px-4{
   padding-left: 1rem;
   padding-right: 1rem;
@@ -878,6 +925,12 @@ video {
 
 .focus\:shadow-outline:focus{
   box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5);
+}
+
+.text-white{
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
 }
 
 .text-gray-600{
@@ -922,6 +975,11 @@ video {
 
 .z-40{
   z-index: 40;
+}
+
+.gap-4{
+  grid-gap: 1rem;
+  gap: 1rem;
 }
 
 @-webkit-keyframes spin{
@@ -1047,6 +1105,14 @@ video {
     .md\:container{
       max-width: 1280px;
     }
+  }
+
+  .md\:m-12{
+    margin: 3rem;
+  }
+
+  .md\:p-12{
+    padding: 3rem;
   }
 }
 

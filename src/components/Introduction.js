@@ -1,4 +1,10 @@
-import { faCalendarAlt, faGlobe, faMapMarked, faStreetView, faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCalendarAlt,
+  faGlobe,
+  faMapMarked,
+  faStreetView,
+  faWindowClose,
+} from "@fortawesome/free-solid-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
@@ -17,11 +23,15 @@ const Introduction = ({ setInfo, showInfo }) => {
         <HeaderButton
           icon={faWindowClose}
           onClick={() => {
-            setInfo(!showInfo)
+            localStorage.setItem("showInfo", false);
+            setInfo(!showInfo);
           }}
         />
       </div>
-      <IntroPara>You can use this application to look up information about parcels in the City of Detroit.</IntroPara>
+      <IntroPara>
+        You can use this application to look up information about parcels in the
+        City of Detroit.
+      </IntroPara>
       <IntroPara>You can find information about parcels in two ways:</IntroPara>
       <ul className="list-disc list-inside ml-2 py-2 text-sm">
         <li>
@@ -50,8 +60,26 @@ const Introduction = ({ setInfo, showInfo }) => {
         You can also switch the map baselayer to <b>satellite imagery</b>
         <FontAwesomeIcon icon={faGlobe} className="mx-2" />
       </IntroPara>
-      <IntroPara>Do you have questions or comments about this tool? Tell us using our 
-      {" "}<a href="https://airtable.com/shrInZsfyRoJvq8GJ" className="underline text-gray-700 hover:text-blue-600">feedback form</a> or please open a <a href="https://github.com/CityOfDetroit/parcel-viewer/issues" className="underline text-gray-700 hover:text-blue-600">GitHub issue</a>.</IntroPara>
+      <IntroPara>
+        Do you have questions or comments about this tool? Tell us using our{" "}
+        <a
+          href="https://airtable.com/shrInZsfyRoJvq8GJ"
+          className="underline text-gray-700 hover:text-blue-600"
+        >
+          feedback form
+        </a>{" "}
+        or please open a{" "}
+        <a
+          href="https://github.com/CityOfDetroit/parcel-viewer/issues"
+          className="underline text-gray-700 hover:text-blue-600"
+        >
+          GitHub issue
+        </a>
+        .
+      </IntroPara>
+      <button className="underline text-gray-700 hover:text-blue-600" onClick={handleViewDisclaimer}>
+        View full disclaimer
+      </button>
     </section>
   );
 };

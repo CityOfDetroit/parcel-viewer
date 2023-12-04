@@ -158,3 +158,11 @@ input {
 .bg-det-light-green {
   background: rgb(159, 213, 179);
 }
+
+.disclaimer p {
+  margin-bottom: 0.5em;
+}
+
+.disclaimer h1,h2,h3,h4 {
+  margin-bottom: 0.5em;
+}

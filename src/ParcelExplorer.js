@@ -11,6 +11,8 @@ import Map from "./components/Map";
 import StreetView from "./components/StreetView";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {faGithub} from '@fortawesome/free-brands-svg-icons'
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import Disclaimer from "./components/Disclaimer.js";
 
 const SidebarFooter = () => {
   return (
@@ -20,6 +22,30 @@ const SidebarFooter = () => {
     </div>
   )
 }
+
+const SiteRetired = ({ parcel }) => { 
+  
+  let newRootUrl = `https://base-unit-tools.netlify.app/`
+
+  return (
+  <div className="px-4 py-4 font-semibold bg-red-400 text-sm" style={{background: 'rgba(200,20,20,0.9)', padding: '10px', color: 'white', fontWeight: 500}}>
+  <h3 style={{borderBottom: 'none', marginBottom: '1em'}}>
+    <FontAwesomeIcon icon={faExclamationTriangle} className="mr-2" />
+    This tool will soon be retired! 
+  </h3>
+  <p className="font-normal" style={{margin: '.5em 0'}}>
+    Please migrate to the <a href={`${newRootUrl}/map?id=${parcel}&type=parcels&layers=parcels&basemap=satellite`} className="underline">Base Unit Tools site</a> for parcel information, and change your bookmarks.
+  </p>
+  
+  <p className="font-normal" style={{margin: '.5em 0'}}>
+  The <b>new URL</b> for the page you are currently viewing is:
+  </p>
+  
+  <p style={{margin: '1em 0 .5em 0', background: 'rgb(230,230,230)', padding: '.5em', color: 'blue'}} className="w-full font-mono">
+    <a href={`${newRootUrl}/parcel-viewer?id=${parcel}&type=parcels&basemap=satellite`} className="underline text-xs font-thin">https://base-unit-tools.netlify.app/parcel-viewer?id={parcel}&type=parcels&basemap=satellite</a>
+  </p>
+</div>
+)}
 
 const ParcelExplorer = () => {
   // get the parcel ID from the URL
@@ -38,7 +64,7 @@ const ParcelExplorer = () => {
   const [showSv, setSv] = useState(false);
   const [svCoords, setSvCoords] = useState(null);
   const [svBearing, setSvBearing] = useState(null);
-  const [showInfo, setInfo] = useState(mobile ? false : true)
+  const [showInfo, setInfo] = useState(localStorage.getItem("showInfo") || false);
   const [showSearch, setSearch] = useState(mobile ? false : true)
   const [showSatellite, setSatellite] = useState(true)
 
@@ -53,9 +79,14 @@ const ParcelExplorer = () => {
     return () => window.removeEventListener("resize", handleWindowResize);
   }, []);
 
+  let [disclaimed, setDisclaimed] = useState(localStorage.getItem("disclaimed") || false);
+  let [intro, setIntro] = useState(localStorage.getItem("intro") || false);
+
   return (
+    !disclaimed ? <Disclaimer {...{setDisclaimed}} /> : 
     <div className={!mobile ? "App" : "MobileApp"}>
       <Header {...{setSearch, showSearch, showInfo, setInfo, setParcel, showSv, setSv, showSatellite, setSatellite, mobile}}>
+        {/* {parcel && <SiteRetired parcel={parcel} />} */}
         {showInfo && <Introduction {...{setInfo, showInfo}}/>}
         {showSearch && <AddressSearch {...{ parcel, setParcel, setCoords, setSearch, showSearch }} />}
       </Header>
@@ -77,3 +108,4 @@ const ParcelExplorer = () => {
 };
 
 export default ParcelExplorer;
+ 
