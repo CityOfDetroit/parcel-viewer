@@ -17,7 +17,7 @@ import Disclaimer from "./components/Disclaimer.js";
 const SidebarFooter = () => {
   return (
     <div className="px-2 flex justify-between items-center bg-det-gray text-sm" style={{gridArea: 'f'}}>
-      <span>City of Detroit, 2020. <a href="https://airtable.com/shrInZsfyRoJvq8GJ" className="underline text-gray-700 hover:text-blue-600">feedback form</a></span>
+      <span>City of Detroit, {new Date().getFullYear()}. <a href="https://airtable.com/shrInZsfyRoJvq8GJ" className="underline text-gray-700 hover:text-blue-600">feedback form</a></span>
       <a href="https://www.github.com/CityOfDetroit/parcel-viewer/"><FontAwesomeIcon icon={faGithub} /></a>
     </div>
   )
@@ -83,7 +83,7 @@ const ParcelExplorer = () => {
   let [intro, setIntro] = useState(localStorage.getItem("intro") || false);
 
   return (
-    !disclaimed ? <Disclaimer {...{setDisclaimed}} /> : 
+    // !disclaimed ? <Disclaimer {...{setDisclaimed}} /> : 
     <div className={!mobile ? "App" : "MobileApp"}>
       <Header {...{setSearch, showSearch, showInfo, setInfo, setParcel, showSv, setSv, showSatellite, setSatellite, mobile}}>
         {/* {parcel && <SiteRetired parcel={parcel} />} */}

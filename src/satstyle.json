@@ -9,7 +9,7 @@
       },
       "baseunits": {
         "type": "vector",
-        "tiles": ["https://tiles.arcgis.com/tiles/qvkbeam7Wirps6zC/arcgis/rest/services/BaseUnitVectorTiles_dev/VectorTileServer/tile/{z}/{y}/{x}.pbf"]
+        "tiles": ["https://tiles.arcgis.com/tiles/qvkbeam7Wirps6zC/arcgis/rest/services/BaseUnitServices/VectorTileServer/tile/{z}/{y}/{x}.pbf"]
       },
       "satellite": {
         "type": "raster",
