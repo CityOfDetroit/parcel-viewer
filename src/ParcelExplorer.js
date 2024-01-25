@@ -87,7 +87,7 @@ const ParcelExplorer = () => {
     <div className={!mobile ? "App" : "MobileApp"}>
       <Header {...{setSearch, showSearch, showInfo, setInfo, setParcel, showSv, setSv, showSatellite, setSatellite, mobile}}>
         {/* {parcel && <SiteRetired parcel={parcel} />} */}
-        {showInfo && <Introduction {...{setInfo, showInfo}}/>}
+        {showInfo && <Introduction {...{setInfo, showInfo, disclaimed, setDisclaimed}}/>}
         {showSearch && <AddressSearch {...{ parcel, setParcel, setCoords, setSearch, showSearch }} />}
       </Header>
       <div id="sidebar">

@@ -37,8 +37,8 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
       .then((d) => {
         if (d.candidates.length > 0) {
           let { attributes, location } = d.candidates[0];
-          if (attributes["parcel_id"]) {
-            setParcel(attributes["parcel_id"]);
+          if (attributes["parcel_number"]) {
+            setParcel(attributes["parcel_number"]);
           } else {
             console.log("not found!");
             setParcel(null);

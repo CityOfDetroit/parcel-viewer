@@ -77,7 +77,7 @@ const Introduction = ({ setInfo, showInfo }) => {
         </a>
         .
       </IntroPara>
-      <button className="underline text-gray-700 hover:text-blue-600" onClick={handleViewDisclaimer}>
+      <button className="underline text-gray-700 hover:text-blue-600">
         View full disclaimer
       </button>
     </section>
