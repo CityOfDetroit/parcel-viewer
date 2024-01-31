@@ -113,7 +113,7 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
             </tr>
             <tr>
               <td>Taxable Value</td>
-              <td>{`$${parseInt(d.assessed_value).toLocaleString()}`}</td>
+              <td>{`$${parseInt(d.taxable_value).toLocaleString()}`}</td>
             </tr>
           </tbody>
         </table>
