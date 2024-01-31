@@ -27,7 +27,6 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
   const handleSearch = (value) => {
     suggestAddress(value);
     setValue(value);
-    console.log(dataSource)
   };
 
   const onSearchSelect = (value) => {
@@ -35,6 +34,7 @@ function AddressSearch({ setCoords, setSearch, setParcel }) {
     fetch(url)
       .then((r) => r.json())
       .then((d) => {
+        console.log(d)
         if (d.candidates.length > 0) {
           let { attributes, location } = d.candidates[0];
           if (attributes["parcel_id"]) {
