@@ -83,7 +83,7 @@ const ParcelExplorer = () => {
   let [intro, setIntro] = useState(localStorage.getItem("intro") || false);
 
   return (
-    // !disclaimed ? <Disclaimer {...{setDisclaimed}} /> : 
+    !disclaimed ? <Disclaimer {...{setDisclaimed}} /> : 
     <div className={!mobile ? "App" : "MobileApp"}>
       <Header {...{setSearch, showSearch, showInfo, setInfo, setParcel, showSv, setSv, showSatellite, setSatellite, mobile}}>
         {/* {parcel && <SiteRetired parcel={parcel} />} */}

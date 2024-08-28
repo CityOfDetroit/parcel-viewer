@@ -15,7 +15,7 @@ const IntroPara = ({ children }) => {
   return <p className="py-2 text-sm">{children}</p>;
 };
 
-const Introduction = ({ setInfo, showInfo }) => {
+const Introduction = ({ setInfo, showInfo, setDisclaimed }) => {
   return (
     <section className="details introduction px-2 py-2 bg-det-gray bg-opacity-50 rounded overflow-y-auto">
       <div className="flex items-center align-top justify-between">
@@ -77,7 +77,7 @@ const Introduction = ({ setInfo, showInfo }) => {
         </a>
         .
       </IntroPara>
-      <button className="underline text-gray-700 hover:text-blue-600">
+      <button className="underline text-gray-700 hover:text-blue-600" onClick={() => setDisclaimed(false)} >
         View full disclaimer
       </button>
     </section>
