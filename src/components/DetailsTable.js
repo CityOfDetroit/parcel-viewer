@@ -96,6 +96,10 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
                 <td>{d.style}</td>
               </tr>
             )}
+            <tr>
+              <td>Historic Designation</td>
+              <td>{d.historic_designation}</td>
+            </tr>
           </tbody>
         </table>
       </section>
