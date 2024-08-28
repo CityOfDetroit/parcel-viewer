@@ -9,7 +9,7 @@
       },
       "baseunits": {
         "type": "vector",
-        "tiles": ["https://tiles.arcgis.com/tiles/qvkbeam7Wirps6zC/arcgis/rest/services/BaseUnitVectorTiles/VectorTileServer/tile/{z}/{y}/{x}.pbf"]
+        "tiles": ["https://tiles.arcgis.com/tiles/qvkbeam7Wirps6zC/arcgis/rest/services/BaseUnitServices/VectorTileServer/tile/{z}/{y}/{x}.pbf"]
       },
       "satellite": {
         "type": "raster",
@@ -10574,7 +10574,7 @@
         "source": "baseunits",
         "source-layer": "parcels",
         "minzoom": 11,
-        "filter": ["==", "parcel_id", ""],
+        "filter": ["==", "parcel_number", ""],
         "layout": {
           "visibility": "visible"
         },

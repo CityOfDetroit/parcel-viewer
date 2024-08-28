@@ -21,7 +21,7 @@ export default function App() {
           <Route path="/:pid" children={<ParcelExplorer />} />
           <Route path="/">
             <ParcelExplorer />
-          </Route>x
+          </Route>
         </Switch>
         </Analytics>
     </Router>
