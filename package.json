@@ -28,8 +28,8 @@
     "terraformer-arcgis-parser": "^1.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && cp build/index.html build/404.html",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build && cp build/index.html build/404.html",
     "prestart": "npm run build:tailwind",
     "prebuild": "npm run build:tailwind",
     "build:tailwind": "tailwindcss build src/tailwind.css -o src/tailwind.output.css",

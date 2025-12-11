@@ -7,7 +7,8 @@ const Disclaimer = ({ setDisclaimed }) => {
   };
 
   return (
-    <div className="disclaimer m-2 p-2 md:m-12 md:p-12 flex flex-col gap-4">
+    <div className="disclaimer flex items-center justify-center min-h-screen py-8 px-4">
+      <div className="bg-white rounded shadow-lg max-w-2xl max-h-[80vh] overflow-y-auto p-4 md:p-8">
       <h1 className="mb-4">Full Disclaimer</h1>
 
       <div>
@@ -160,6 +161,7 @@ const Disclaimer = ({ setDisclaimed }) => {
       >
         I have read and agree to the terms of use and disclaimer
       </button>
+      </div>
     </div>
   );
 };

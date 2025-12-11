@@ -65,7 +65,7 @@ const Map = ({
 
         // Subsequent clicks on the same shape cycle between overlapping parcels.
         setParcel((currentParcel) => {
-          const parcels = results.map((p) => p.properties.parcel_number);
+          const parcels = results.map((p) => p.properties.parcel_id);
           const currentIndex = parcels.findIndex(
             (candidateParcel) => candidateParcel === currentParcel
           );
@@ -86,7 +86,7 @@ const Map = ({
         map.addImage("video", image);
         map.setFilter("parcels-highlight", [
           "==",
-          "parcel_number",
+          "parcel_id",
           parcel ? parcel : "",
         ]);
         svCoords &&
@@ -124,7 +124,7 @@ const Map = ({
     theMap &&
       theMap.setFilter("parcels-highlight", [
         "==",
-        "parcel_number",
+        "parcel_id",
         parcel ? parcel : "",
       ]);
   }, [parcel, theMap]);

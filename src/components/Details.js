@@ -14,14 +14,14 @@ const Details = ({ parcel, setCoords, mobile, children }) => {
   const fetchData = (parcel) => {
     // object to hold URL query string parameters
     let params = {
+      where: `parcel_id='${parcel}'`,
       outFields: "*",
       outSR: 4326,
       f: "json",
-      where: `parcel_number='${parcel}'`,
     };
 
     // service URL for parcel layer
-    let url = `https://services2.arcgis.com/qvkbeam7Wirps6zC/arcgis/rest/services/Parcel_File_2023/FeatureServer/1/query?`;
+    let url = `https://services2.arcgis.com/qvkbeam7Wirps6zC/arcgis/rest/services/parcel_file_current/FeatureServer/0/query?`;
 
     // loop through params keys, make URI encoded string, join with &s
     let queryString = Object.keys(params)
@@ -63,7 +63,7 @@ const Details = ({ parcel, setCoords, mobile, children }) => {
             <table className="bg-det-gray mb-1" style={{ position: 'sticky', top: 0}}>
               <thead>
                 <tr className="">
-                  <td>Parcel ID: {parcelData.attributes.parcel_number}</td>
+                  <td>Parcel ID: {parcelData.attributes.parcel_id}</td>
                   <td>
                     Address: <b>{parcelData.attributes.address}</b>
                   </td>

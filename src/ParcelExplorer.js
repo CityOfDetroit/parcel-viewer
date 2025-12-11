@@ -23,26 +23,26 @@ const SidebarFooter = () => {
   )
 }
 
-const SiteRetired = ({ parcel }) => { 
-  
-  let newRootUrl = `https://base-unit-tools.netlify.app/`
+const SiteRetired = ({ parcel }) => {
+
+  let newRootUrl = `https://base-unit-tools.netlify.app`
+
+  const newUrl = parcel
+    ? `${newRootUrl}/map?id=${parcel}&type=parcel&mode=parcel`
+    : `${newRootUrl}/map?mode=parcel`;
 
   return (
   <div className="px-4 py-4 font-semibold bg-red-400 text-sm" style={{background: 'rgba(200,20,20,0.9)', padding: '10px', color: 'white', fontWeight: 500}}>
   <h3 style={{borderBottom: 'none', marginBottom: '1em'}}>
     <FontAwesomeIcon icon={faExclamationTriangle} className="mr-2" />
-    This tool will soon be retired! 
+    This site is experiencing errors in Chrome on the city's internal network.
   </h3>
   <p className="font-normal" style={{margin: '.5em 0'}}>
-    Please migrate to the <a href={`${newRootUrl}/map?id=${parcel}&type=parcels&layers=parcels&basemap=satellite`} className="underline">Base Unit Tools site</a> for parcel information, and change your bookmarks.
+    Please use the <a href={newUrl} target="_blank" rel="noopener noreferrer" className="underline" style={{color: 'white', fontWeight: 'bold'}}>Base Unit Tools site</a> instead for parcel information.
   </p>
-  
-  <p className="font-normal" style={{margin: '.5em 0'}}>
-  The <b>new URL</b> for the page you are currently viewing is:
-  </p>
-  
+
   <p style={{margin: '1em 0 .5em 0', background: 'rgb(230,230,230)', padding: '.5em', color: 'blue'}} className="w-full font-mono">
-    <a href={`${newRootUrl}/parcel-viewer?id=${parcel}&type=parcels&basemap=satellite`} className="underline text-xs font-thin">https://base-unit-tools.netlify.app/parcel-viewer?id={parcel}&type=parcels&basemap=satellite</a>
+    <a href={newUrl} target="_blank" rel="noopener noreferrer" className="underline text-xs font-thin">{newUrl}</a>
   </p>
 </div>
 )}
@@ -86,7 +86,7 @@ const ParcelExplorer = () => {
     !disclaimed ? <Disclaimer {...{setDisclaimed}} /> : 
     <div className={!mobile ? "App" : "MobileApp"}>
       <Header {...{setSearch, showSearch, showInfo, setInfo, setParcel, showSv, setSv, showSatellite, setSatellite, mobile}}>
-        {/* {parcel && <SiteRetired parcel={parcel} />} */}
+        <SiteRetired parcel={parcel} />
         {showInfo && <Introduction {...{setInfo, showInfo, disclaimed, setDisclaimed}}/>}
         {showSearch && <AddressSearch {...{ parcel, setParcel, setCoords, setSearch, showSearch }} />}
       </Header>

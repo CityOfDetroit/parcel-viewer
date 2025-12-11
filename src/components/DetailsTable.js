@@ -25,7 +25,7 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
             )}
             <tr>
               <td>Taxpayer Address</td>
-              <td>{`${d.taxpayer_street}, ${d.taxpayer_city}, ${d.taxpayer_state}, ${d.taxpayer_zip}`}</td>
+              <td>{`${d.taxpayer_address}, ${d.taxpayer_city}, ${d.taxpayer_state}, ${d.taxpayer_zip_code}`}</td>
             </tr>
             {d.saledate && (
               <tr>
@@ -36,12 +36,12 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
             {d.saledate && (
               <tr>
                 <td>Last Sale Price</td>
-                <td>{`$${parseInt(d.sale_price).toLocaleString()}`}</td>
+                <td>{`$${parseInt(d.amt_sale_price).toLocaleString()}`}</td>
               </tr>
             )}
             <tr>
               <td>PRE %</td>
-              <td>{d.homestead_pre}</td>
+              <td>{d.pct_pre_claimed}</td>
             </tr>
             {d.nez !== "" && (
               <tr>
@@ -67,18 +67,18 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
             <tr>
               <td>Property Class</td>
               <td>
-                {d.property_class} - {d.property_class_desc}
+                {d.property_class} - {d.property_class_description}
               </td>
             </tr>
             <tr>
               <td>Property Use</td>
               <td>
-                {d.use_code} - {d.use_code_desc}
+                {d.use_code} - {d.use_code_description}
               </td>
             </tr>
             <tr>
               <td>Zoning</td>
-              <td>{d.zoning}</td>
+              <td>{d.zoning_district}</td>
             </tr>
             <tr>
               <td># of Buildings</td>
@@ -93,12 +93,12 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
             {d.style && (
               <tr>
                 <td>Style</td>
-                <td>{d.style}</td>
+                <td>{d.building_style}</td>
               </tr>
             )}
             <tr>
               <td>Historic Designation</td>
-              <td>{d.historic_designation}</td>
+              <td>{d.local_historic_district}</td>
             </tr>
           </tbody>
         </table>
@@ -109,15 +109,15 @@ function DetailsTable({ parcelData, parcelApiData, mobile }) {
           <tbody>
             <tr>
               <td>Tax Status</td>
-              <td>{d.tax_status}</td>
+              <td>{d.tax_status_description}</td>
             </tr>
             <tr>
               <td>Assessed Value</td>
-              <td>{`$${parseInt(d.assessed_value).toLocaleString()}`}</td>
+              <td>{`$${parseInt(d.amt_assessed_value).toLocaleString()}`}</td>
             </tr>
             <tr>
               <td>Taxable Value</td>
-              <td>{`$${parseInt(d.taxable_value).toLocaleString()}`}</td>
+              <td>{`$${parseInt(d.amt_taxable_value).toLocaleString()}`}</td>
             </tr>
           </tbody>
         </table>
