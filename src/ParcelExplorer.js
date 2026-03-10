@@ -35,7 +35,7 @@ const SiteRetired = ({ parcel }) => {
   <div className="px-4 py-4 font-semibold bg-red-400 text-sm" style={{background: 'rgba(200,20,20,0.9)', padding: '10px', color: 'white', fontWeight: 500}}>
   <h3 style={{borderBottom: 'none', marginBottom: '1em'}}>
     <FontAwesomeIcon icon={faExclamationTriangle} className="mr-2" />
-    This site is experiencing errors in Chrome on the city's internal network.
+    Parcel Viewer is a legacy application that may be retired soon
   </h3>
   <p className="font-normal" style={{margin: '.5em 0'}}>
     Please use the <a href={newUrl} target="_blank" rel="noopener noreferrer" className="underline" style={{color: 'white', fontWeight: 'bold'}}>Base Unit Tools site</a> instead for parcel information.
